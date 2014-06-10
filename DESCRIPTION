@@ -1,6 +1,6 @@
 Package: respecies
 Type: Package
-Title: Interface to Joint Research Centre's eSpecies API
+Title: R client to Joint Research Centre's eSpecies API
 Version: 0.0.1
 Date: 2014-06-10
 Author: Joona Lehtomäki <joona.lehtomaki@gmail.com>
