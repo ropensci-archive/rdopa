@@ -5,8 +5,8 @@ Version: 0.0.1
 Date: 2014-06-10
 Author: Joona Lehtomäki <joona.lehtomaki@gmail.com>
 Maintainer: Joona Lehtomäki <joona.lehtomaki@gmail.com>
-Description: R client for REST web service eSpecies by the European Union Joint 
-  Research Centre
+Description: R client for REST web service eSpecies by the European Union Joint
+    Research Centre
 License: CC0
 Encodcing: UTF-8
 Imports:
