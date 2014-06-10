@@ -10,11 +10,12 @@ Description: R client for REST web service eSpecies by the European Union Joint
 License: CC0
 Encodcing: UTF-8
 Imports:
+    countrycode,
     httr
 Suggests:
-    roxygen2,
-    testthat,
     jsonlite,
-    knitr
+    knitr,
+    roxygen2,
+    testthat
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
