@@ -13,7 +13,7 @@ Returns a count of the species whose range intersects with the country. This
 intersection on the species range includes the Exclusive Economic Zone
 boundary for the country which extends out to 200 nautical miles from the
 coastline. The EEZ boundary was derived from the Flanders Marine Institute
-(see \link{http://www.vliz.be/vmdcdata/marbound/} for more information).
+(see \url{http://www.vliz.be/vmdcdata/marbound/} for more information).
 }
 \details{
 Package \code{\link{countrycode}} is used to resolve the value of argument
@@ -22,16 +22,20 @@ ISO 3166-1 country code (\code{iso3n}).
 }
 \examples{
 \dontrun{
+
 # Using country name
 get_country_species_count(country="Finland")
 
-# Using conuntry code
+# Using country code
 get_country_species_count(country=156)
 
 }
 }
+\author{
+Joona Lehtomaki <joona.lehtomaki@gmail.com>
+}
 \seealso{
-\link{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
+\url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
 
 \code{\link{countrycode}}
 }
