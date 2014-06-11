@@ -9,8 +9,10 @@ Description: R client for REST web service eSpecies by the European Union Joint
     Research Centre
 License: CC0
 Encodcing: UTF-8
+Depends:
+    R (>= 2.15.2),
+    countrycode
 Imports:
-    countrycode,
     httr
 Suggests:
     jsonlite,
