@@ -3,12 +3,11 @@ Type: Package
 Title: R client to Joint Research Centre's eSpecies API
 Version: 0.0.1
 Date: 2014-06-10
-Author: Joona Lehtomäki <joona.lehtomaki@gmail.com>
+Author: Joona Lehtomaki <joona.lehtomaki@gmail.com>
 Maintainer: Joona Lehtomäki <joona.lehtomaki@gmail.com>
 Description: R client for REST web service eSpecies by the European Union Joint
     Research Centre
 License: CC0
-Encodcing: UTF-8
 Depends:
     R (>= 2.15.2),
     countrycode
