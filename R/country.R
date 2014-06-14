@@ -6,18 +6,7 @@
 #' coastline. The EEZ boundary was derived from the Flanders Marine Institute 
 #' (see \url{http://www.vliz.be/vmdcdata/marbound/} for more information).
 #' 
-#' Argument \code{rlstatus} is a vector containing one or several of the 
-#' following:
-#' \tabular{rl}{
-#'  \code{"CR"} \tab Critically Endangered \cr
-#'  \code{"EN"} \tab Endangered \cr
-#'  \code{"VU"} \tab Vulnerable \cr
-#'  \code{"NT"} \tab Near Threatened \cr
-#'  \code{"LC"} \tab Least Concern \cr
-#'  \code{"EX"} \tab Extinct \cr
-#'  \code{"EW"} \tab Extinct in the Wild \cr
-#'  \code{"DD"} \tab Data Deficient \cr
-#' }
+
 #' For more information see \url{http://www.iucnredlist.org/technical-documents/categories-and-criteria}.
 #' 
 #' @param country_id Character country name or numeric country code.
@@ -32,7 +21,7 @@
 #' @export
 #' 
 #' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
-#' @seealso \code{\link{resolve_country}} 
+#' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #' 
@@ -60,6 +49,7 @@ get_country_species_count <- function(country, rlstatus=NULL) {
               country_id = code
              ))
   } else {
+    rlstatus <- check_iucn_status(rlstatus)
     r <- GET("http://dopa-services.jrc.ec.europa.eu",
              path = "services/especies/get_country_species_count",
              query = list(
