@@ -6,10 +6,6 @@
 #' coastline. The EEZ boundary was derived from the Flanders Marine Institute 
 #' (see \url{http://www.vliz.be/vmdcdata/marbound/} for more information).
 #' 
-#' @details Package \code{\link{countrycode}} is used to resolve the value of argument
-#' \code{country} which can be either a country name (\code{country.name}) or a 
-#' ISO 3166-1 country code (\code{iso3n}).
-#' 
 #' Argument \code{rlstatus} is a vector containing one or several of the 
 #' following:
 #' \tabular{rl}{
@@ -32,12 +28,11 @@
 #' @return Numeric count of the species whose range intersects with the country.
 #' 
 #' @import httr
-#' @import countrycode
 #' 
 #' @export
 #' 
 #' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
-#' @seealso \code{\link{countrycode}} 
+#' @seealso \code{\link{resolve_country}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #' 
@@ -55,30 +50,7 @@
 #' }
 get_country_species_count <- function(country, rlstatus=NULL) {
   
-  # Check if country is string that can be coerced to a numeric
-  if (suppressWarnings(!is.na(as.numeric(country)))) {
-    country <- as.numeric(country)
-  }
-  
-  # If country is provided as a country name, try to convert it to a ISO code
-  if (is.character(country)) {
-    origin <- "country.name"
-    destination <- "iso3n"
-    # Must coerce to numeric, will give integer otherwise
-    code <- as.numeric(countrycode(country, "country.name", "iso3n"))
-    if (is.na(code)) {
-      stop("Country name ", country, " was not matched to an ISO code.")
-    }
-  } else if (is.numeric(country)) {
-    # Check that the ISO code exists
-    if (!country %in% countrycode_data$iso3n) {
-      stop("Country code ", country, " not a valid ISO 3166-1 code")
-    } else {
-      code  <- country
-    }
-  } else {
-    stop("country must be either string country name of numeric country code")
-  }
+  code <- resolve_country(country)
   
   # Construct the REST parameters
   if (is.null(rlstatus)) {
