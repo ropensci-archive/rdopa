@@ -1,0 +1,11 @@
+{ 
+  "base_url": "http://dopa-services.jrc.ec.europa.eu/services",
+  "schema": {
+  	"especies": {
+  		"schema": "especies",
+  		"methods": [
+  			"get_country_species_count",
+  			"get_country_species_list"  		]
+  	}
+  }
+}
