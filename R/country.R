@@ -24,10 +24,12 @@
 #' }
 #' For more information see \url{http://www.iucnredlist.org/technical-documents/categories-and-criteria}.
 #' 
-#' @param country_id character country name or numeric country code.
-#' @param rlstatus character vector of the IUCN Conservation Status for the 
+#' @param country_id Character country name or numeric country code.
+#' @param rlstatus A character vector of the IUCN Conservation Status for the 
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.
+#' 
+#' @return Numeric count of the species whose range intersects with the country.
 #' 
 #' @import httr
 #' @import countrycode
@@ -52,7 +54,7 @@
 #'  
 #' }
 get_country_species_count <- function(country, rlstatus=NULL) {
-
+  
   # Check if country is string that can be coerced to a numeric
   if (suppressWarnings(!is.na(as.numeric(country)))) {
     country <- as.numeric(country)
@@ -77,5 +79,32 @@ get_country_species_count <- function(country, rlstatus=NULL) {
   } else {
     stop("country must be either string country name of numeric country code")
   }
-  return(code)
+  
+  # Construct the REST parameters
+  if (is.null(rlstatus)) {
+    r <- GET("http://dopa-services.jrc.ec.europa.eu",
+             path = "services/especies/get_country_species_count",
+             query = list(
+              country_id = code
+             ))
+  } else {
+    r <- GET("http://dopa-services.jrc.ec.europa.eu",
+             path = "services/especies/get_country_species_count",
+             query = list(
+               country_id = code,
+               rlstatus = paste(rlstatus, collapse=",")
+             ))
+  }
+  # Check the request succeeded
+  stop_for_status(r)
+  
+  r_content <- content(r)
+  
+  # Only one record should be returned
+  if (length(r_content$records) > 1) {
+    warning("More than one response records received, something might be wrong")
+  }
+  spp_count <- r_content$records[[1]]$get_country_species_count
+  
+  return(spp_count)
 }

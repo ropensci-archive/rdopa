@@ -12,6 +12,9 @@ get_country_species_count(country, rlstatus = NULL)
   species. Default is \code{NULL} in which case species of all statuses are
   requested.}
 }
+\value{
+numeric count of the species whose range intersects with the country.
+}
 \description{
 Returns a count of the species whose range intersects with the country. This
 intersection on the species range includes the Exclusive Economic Zone
