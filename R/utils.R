@@ -1,3 +1,55 @@
+#' Check whether inputs are valid IUCN status codes.
+#' 
+#' A warning is raised if a item in \code{statuses} is not found. This item
+#' is removed from the vector. If none of the items are valid, raise an error.
+#' 
+#' Argument \code{statuses} is a vector containing one or several of the 
+#' following:
+#' \tabular{rl}{
+#'  \code{"CR"} \tab Critically Endangered \cr
+#'  \code{"EN"} \tab Endangered \cr
+#'  \code{"VU"} \tab Vulnerable \cr
+#'  \code{"NT"} \tab Near Threatened \cr
+#'  \code{"LC"} \tab Least Concern \cr
+#'  \code{"EX"} \tab Extinct \cr
+#'  \code{"EW"} \tab Extinct in the Wild \cr
+#'  \code{"DD"} \tab Data Deficient \cr
+#' }
+#' 
+#' @param statuses A character vector of the IUCN Conservation Statuses.
+
+#' @return valid A character vector of valid items in \code{statuses}. 
+#' 
+#' @export
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#' 
+#' @examples
+#' 
+#' # Using country name
+#' code <- resolve_country("Finland")
+#'   
+#' # Using country code (156 is China)
+#' code <- resolve_country(156)
+#' 
+#' # Country code can be provided as a character string as well
+#' code <- resolve_country("156")
+#'
+check_iucn_status <- function(statuses) {
+  valid <- c()
+  for (status in statuses) {
+    if (!status %in% c("CR", "EN", "VU", "NT", "LC", "EX", "EW", "DD")) {
+      warning(status, " is not a valid IUCN status code")
+    } else {
+      valid <- c(valid, status)
+    }
+  }
+  if (length(valid) == 0) {
+    stop("None of the provided codes are valid IUCN status codes")
+  }
+  return(valid)
+}
+
 #' Get ISO 3166-1 country code.
 #' 
 #' Country identity can be provided as a number or as country name. If the 
@@ -29,7 +81,6 @@
 #' 
 #' # Country code can be provided as a character string as well
 #' code <- resolve_country("156")
-#'  
 #'
 resolve_country <- function(country) {
   
