@@ -6,14 +6,14 @@
 get_country_species_count(country, rlstatus = NULL)
 }
 \arguments{
-\item{country_id}{character country name or numeric country code.}
+\item{country_id}{Character country name or numeric country code.}
 
-\item{rlstatus}{character vector of the IUCN Conservation Status for the
+\item{rlstatus}{A character vector of the IUCN Conservation Status for the
   species. Default is \code{NULL} in which case species of all statuses are
   requested.}
 }
 \value{
-numeric count of the species whose range intersects with the country.
+Numeric count of the species whose range intersects with the country.
 }
 \description{
 Returns a count of the species whose range intersects with the country. This
@@ -23,10 +23,6 @@ coastline. The EEZ boundary was derived from the Flanders Marine Institute
 (see \url{http://www.vliz.be/vmdcdata/marbound/} for more information).
 }
 \details{
-Package \code{\link{countrycode}} is used to resolve the value of argument
-\code{country} which can be either a country name (\code{country.name}) or a
-ISO 3166-1 country code (\code{iso3n}).
-
 Argument \code{rlstatus} is a vector containing one or several of the
 following:
 \tabular{rl}{
@@ -61,6 +57,6 @@ Joona Lehtomaki <joona.lehtomaki@gmail.com>
 \seealso{
 \url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
 
-\code{\link{countrycode}}
+\code{\link{resolve_country}}
 }
 
