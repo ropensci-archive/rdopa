@@ -3,10 +3,14 @@
 \alias{get_country_species_count}
 \title{Get species count for a country}
 \usage{
-get_country_species_count(country)
+get_country_species_count(country, rlstatus = NULL)
 }
 \arguments{
-\item{country}{character country name or numeric country code.}
+\item{country_id}{character country name or numeric country code.}
+
+\item{rlstatus}{character vector of the IUCN Conservation Status for the
+  species. Default is \code{NULL} in which case species of all statuses are
+  requested.}
 }
 \description{
 Returns a count of the species whose range intersects with the country. This
@@ -19,6 +23,20 @@ coastline. The EEZ boundary was derived from the Flanders Marine Institute
 Package \code{\link{countrycode}} is used to resolve the value of argument
 \code{country} which can be either a country name (\code{country.name}) or a
 ISO 3166-1 country code (\code{iso3n}).
+
+Argument \code{rlstatus} is a vector containing one or several of the
+following:
+\tabular{rl}{
+ \code{"CR"} \tab Critically Endangered \cr
+ \code{"EN"} \tab Endangered \cr
+ \code{"VU"} \tab Vulnerable \cr
+ \code{"NT"} \tab Near Threatened \cr
+ \code{"LC"} \tab Least Concern \cr
+ \code{"EX"} \tab Extinct \cr
+ \code{"EW"} \tab Extinct in the Wild \cr
+ \code{"DD"} \tab Data Deficient \cr
+}
+For more information see \url{http://www.iucnredlist.org/technical-documents/categories-and-criteria}.
 }
 \examples{
 \dontrun{
@@ -26,8 +44,11 @@ ISO 3166-1 country code (\code{iso3n}).
 # Using country name
 get_country_species_count(country="Finland")
 
-# Using country code
+# Using country code (156 is China)
 get_country_species_count(country=156)
+
+# Get only critically endangered and endangered species
+get_country_species_count(country=156, rlstatus=c("CR", "EN"))
 
 }
 }
