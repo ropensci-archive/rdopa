@@ -12,9 +12,9 @@ Depends:
     R (>= 2.15.2),
     countrycode
 Imports:
-    httr
+    httr,
+    jsonlite
 Suggests:
-    jsonlite,
     knitr,
     roxygen2,
     testthat
