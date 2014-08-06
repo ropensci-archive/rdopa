@@ -28,16 +28,16 @@
 #' @examples \dontrun{
 #' 
 #' # Using country name
-#' get_country_species_count(country="Finland")
+#' country_species_count(country="Finland")
 #'   
 #' # Using country code (156 is China)
-#' get_country_species_count(country=156)
+#' country_species_count(country=156)
 #' 
 #' # Get only critically endangered and endangered species
-#' get_country_species_count(country=156, rlstatus=c("CR", "EN"))
+#' country_species_count(country=156, rlstatus=c("CR", "EN"))
 #'  
 #' }
-get_country_species_count <- function(country, rlstatus=NULL) {
+country_species_count <- function(country, rlstatus=NULL) {
   
   code <- resolve_country(country)
   
