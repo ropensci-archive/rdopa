@@ -13,8 +13,7 @@ Depends:
     countrycode,
     R.cache
 Imports:
-    httr,
-    jsonlite
+    httr
 Suggests:
     knitr,
     roxygen2,
