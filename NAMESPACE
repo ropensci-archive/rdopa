@@ -2,6 +2,7 @@
 
 export(check_iucn_status)
 export(country_species_count)
+export(country_species_list)
 export(resolve_country)
 import(countrycode)
 import(httr)
