@@ -9,7 +9,7 @@
 
 #' For more information see \url{http://www.iucnredlist.org/technical-documents/categories-and-criteria}.
 #' 
-#' @param country_id Character country name or numeric country code.
+#' @param country Character country name or numeric country code.
 #' @param rlstatus A character vector of the IUCN Conservation Status for the 
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.
@@ -20,6 +20,7 @@
 #' @return Numeric count of the species whose range intersects with the country.
 #' 
 #' @import httr
+#' @import R.cache
 #' 
 #' @export
 #' 
@@ -98,7 +99,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' (see \href{http://www.vliz.be/vmdcdata/marbound/}{here} for more information).
 #' 
 #' 
-#' @param country_id Character country name or numeric country code.
+#' @param country Character country name or numeric country code.
 #' @param rlstatus A character vector of the IUCN Conservation Status for the 
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.  For more information see 
@@ -140,6 +141,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' }
 #' 
 #' @import httr
+#' @import R.cache
 #' 
 #' @export
 #' 
@@ -149,7 +151,12 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #' 
 #' @examples \dontrun{
+#' # Get species for New Zealand
+#' kiwi.species <- country_species_list(country="New Zealand")
 #' 
+#' # Get only endangered species for New Zealand
+#' endangered.kiwi.species <- country_species_list(country="New Zealand",
+#'                                                 rlstatus=c("CR", "EN", "VU"))
 #'  
 #' }
 country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {

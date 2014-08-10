@@ -6,7 +6,7 @@
 country_species_count(country, rlstatus = NULL, cache = TRUE)
 }
 \arguments{
-\item{country_id}{Character country name or numeric country code.}
+\item{country}{Character country name or numeric country code.}
 
 \item{rlstatus}{A character vector of the IUCN Conservation Status for the
 species. Default is \code{NULL} in which case species of all statuses are

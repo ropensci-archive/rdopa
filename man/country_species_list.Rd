@@ -3,18 +3,22 @@
 \alias{country_species_list}
 \title{Get species list for a country}
 \usage{
-country_species_list(country, rlstatus = NULL)
+country_species_list(country, rlstatus = NULL, cache = TRUE)
 }
 \arguments{
-\item{country_id}{Character country name or numeric country code.}
+\item{country}{Character country name or numeric country code.}
 
 \item{rlstatus}{A character vector of the IUCN Conservation Status for the
-  species. Default is \code{NULL} in which case species of all statuses are
-  requested.  For more information see
-  \href{http://www.iucnredlist.org/technical-documents/categories-and-criteria}{here}.}
+species. Default is \code{NULL} in which case species of all statuses are
+requested.  For more information see
+\href{http://www.iucnredlist.org/technical-documents/categories-and-criteria}{here}.}
+
+\item{cache}{Sets the cachce mode: \code{TRUE} = Use cache if available and
+save to cache, \code{FALSE} = Ignore cache if available and do not save to
+cache, \code{"flush"} = Ignore cache if available and save to cache.}
 }
 \value{
-A list of species whose range intersects with the country. Each
+A data.frame of species whose range intersects with the country. Each
 species has the following information associated to it:
 
 \tabular{rl}{
@@ -54,7 +58,12 @@ coastline. The EEZ boundary was derived from the Flanders Marine Institute
 }
 \examples{
 \dontrun{
+# Get species for New Zealand
+kiwi.species <- country_species_list(country="New Zealand")
 
+# Get only endangered species for New Zealand
+endangered.kiwi.species <- country_species_list(country="New Zealand",
+                                                rlstatus=c("CR", "EN", "VU"))
 
 }
 }

@@ -59,7 +59,7 @@ check_iucn_status <- function(statuses) {
 #' \code{country} which can be either a country name (\code{country.name}) or a 
 #' ISO 3166-1 country code (\code{iso3n}).
 #' 
-#' @param country_id Character country name or numeric country code.
+#' @param country Character country name or numeric country code.
 
 #' @return Numeric count of the species whose range intersects with the country.
 #' 

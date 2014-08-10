@@ -6,7 +6,7 @@
 resolve_country(country)
 }
 \arguments{
-\item{country_id}{Character country name or numeric country code.}
+\item{country}{Character country name or numeric country code.}
 }
 \value{
 Numeric count of the species whose range intersects with the country.
