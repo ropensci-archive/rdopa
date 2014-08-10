@@ -62,10 +62,46 @@ test_that("Arguments are handled correctly", {
 })
 
 test_that("API values sane", {
-    
+  
+  kiwi.species <- country_species_list(country="New Zealand", cache=FALSE)
+  
   # Use New Zealand (country code = 554).
   # First get all species and check the number
-  expect_equal(length(country_species_list(country="New Zealand", cache=FALSE)), 
-               463)
+  expect_equal(nrow(kiwi.species), 463)
+  # Test some values/species. Let's take California quail
+  spp <- kiwi.species[69,]
+  expect_equivalent(spp$iucn_species_id, 141389,
+                   "California quail IUCN species ID is wrong")
+  expect_equivalent(spp$taxon, "Callipepla californica",
+                    "California quail taxon is wrong")
+  expect_equivalent(spp$min_presence_id, 1,
+                    "California quail min_presence_id is wrong")
+  expect_equivalent(spp$kingdom, "Animalia",
+                    "California quail kingdom is wrong")
+  expect_equivalent(spp$phylum, "Chordata",
+                    "California quail phylum is wrong")
+  expect_equivalent(spp$class, "Aves",
+                    "California quail class is wrong")
+  expect_equivalent(spp$order, "Galliformes",
+                    "California quail order is wrong")
+  expect_equivalent(spp$family, "Odontophoridae",
+                    "California quail order is wrong")
+  expect_equivalent(spp$status, "LC",
+                    "California quail IUCN status is wrong")
+  expect_equivalent(spp$assessed, "2009/01/01",
+                    "California quail assessment date is wrong")
+  expect_equivalent(spp$commonname, "California Quail",
+                    "California quail common name is wrong")
+  expect_equivalent(spp$language, "english",
+                    "California quail assessment language is wrong")
+  
+  # Test the rlstatus argument
+  kiwi.species.cr <- country_species_list(country="New Zealand", rlstatus="CR",
+                                          cache=FALSE)
+  expect_equal(nrow(kiwi.species.cr), 11)
+  kiwi.species.cr.en <- country_species_list(country="New Zealand", 
+                                             rlstatus=c("CR", "EN"),
+                                             cache=FALSE)
+  expect_equal(nrow(kiwi.species.cr.en), 39)
   
 })

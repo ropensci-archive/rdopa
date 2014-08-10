@@ -107,7 +107,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' save to cache, \code{FALSE} = Ignore cache if available and do not save to 
 #' cache, \code{"flush"} = Ignore cache if available and save to cache.
 #' 
-#' @return A list of species whose range intersects with the country. Each 
+#' @return A data.frame of species whose range intersects with the country. Each 
 #' species has the following information associated to it:
 #'
 #' \tabular{rl}{
@@ -191,5 +191,6 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
       R.cache::saveCache(r_content, key=key, suffix="respecies.Rcache")
     }
   }
-  return(r_content$records)
+  dat <- do.call("rbind", r_content$records)
+  return(dat)
 }
