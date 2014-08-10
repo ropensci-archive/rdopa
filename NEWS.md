@@ -1,7 +1,9 @@
-## respecies 0.0.1
+## respecies 0.1.0
 
 #### New features
 
++ Caching mechanism based on package `R.cache`
+  - Use `R.cache::clearCache()` to clear the whole cache
 + `country_species_count()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count) 
 for documentation of the method.
 + `resolve_country()` can be used to resolve country names into ISO 3166-1 
