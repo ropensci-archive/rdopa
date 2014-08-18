@@ -1,6 +1,9 @@
-[![Build Status](https://travis-ci.org/jlehtoma/respecies.svg?branch=master)](https://travis-ci.org/jlehtoma/respecies)
+[![Build Status](https://travis-ci.org/jlehtoma/rdopa.svg?branch=master)](https://travis-ci.org/jlehtoma/respecies)
 
-## respecies
+## rdopa
+
+[The Digital Observatory for Protected Areas](http://dopa.jrc.ec.europa.eu/) 
+is 
 
 ## Quick start
 
