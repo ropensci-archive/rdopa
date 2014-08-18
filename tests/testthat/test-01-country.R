@@ -9,6 +9,11 @@ test_that("Arguments are handled correctly", {
 })
 
 test_that("API values sane", {
+  
+  # Expect an integer
+  expect_is(country_species_count(country="Finland", rlstatus="DD",
+                                  cache=FALSE), "numeric")
+  
   # Slightly pointless check since we don't (and don't want to) check 
   # all the possible country/rlstatus combinations
   expect_equal(country_species_count(country="Finland", rlstatus="DD",
