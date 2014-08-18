@@ -2,8 +2,7 @@
 
 ## rdopa
 
-[The Digital Observatory for Protected Areas](http://dopa.jrc.ec.europa.eu/) 
-is 
+rdopa is a R package for accessing data from the DOPA ([Digital Observatory for Protected Areas](http://dopa.jrc.ec.europa.eu/)) REST API. 
 
 ## Quick start
 
