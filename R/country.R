@@ -58,14 +58,14 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
     # Construct the REST parameters
     if (is.null(rlstatus)) {
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/especies/get_country_species_count",
+               path = "rest/eAdmin/get_country_species_count",
                query = list(
                 country_id = code
                ))
     } else {
       rlstatus <- check_iucn_status(rlstatus)
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/especies/get_country_species_count",
+               path = "rest/eAdmin/get_country_species_count",
                query = list(
                  country_id = code,
                  rlstatus = paste(rlstatus, collapse=",")
@@ -176,14 +176,14 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
     # Construct the REST parameters
     if (is.null(rlstatus)) {
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/especies/get_country_species_list",
+               path = "rest/eAdmin/get_country_species_list",
                query = list(
                  country_id = code
                ))
     } else {
       rlstatus <- check_iucn_status(rlstatus)
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/especies/get_country_species_list",
+               path = "rest/eAdmin/get_country_species_list",
                query = list(
                  country_id = code,
                  rlstatus = paste(rlstatus, collapse=",")
