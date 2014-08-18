@@ -1,2 +1,2 @@
 library(testthat)
-test_check("respecies")
+test_check("rdopa")
