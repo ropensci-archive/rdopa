@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/jlehtoma/respecies.svg?branch=master)](https://travis-ci.org/jlehtoma/respecies)
 
-## respecies
+## rdopa
 
 ## Quick start
 
