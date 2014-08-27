@@ -48,7 +48,7 @@ test_that("DOPA responses are parsed correctly", {
   
   # Helper function to check if a list of lists has NULL-elements
   has.nulls <- function(x) {
-    return(any(unlist(lapply(x, function(x) lapply(x, function(x) ifelse(is.null(x), TRUE, FALSE))))))
+    return(any(unlist(lapply(x, function(x) lapply(x, is.null)))))
   }
   
   expect_is(.parse_dopa_response(x), "data.frame",
