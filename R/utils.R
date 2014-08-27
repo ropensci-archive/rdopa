@@ -50,6 +50,34 @@ check_iucn_status <- function(statuses) {
   return(valid)
 }
 
+#' Coerce a DOPA response object into a dataframe
+#' 
+#' DOPA responses are often structured as lists of lists. Turn this into a 
+#' data structure.
+#' 
+#' By default, function \code{\link[httr]{content}} parses nulls in JSON into
+#' NULLs in R, which causes problems in data.frame coercion. Therefore replace
+#' NULLs with NA.
+#' 
+#' @param x list of lists
+
+#' @return Data frame of response data
+#' 
+#' @keywords internal
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#'
+.parse_dopa_response <- function(x) {
+  x <- lapply(x, function(x) lapply(x, function(x) ifelse(is.null(x), NA, x)))
+  
+  # [fixme] - Didn't figure out how to pass stringsAsFactors=FALSE in 
+  # rbind.data.frame to do.call
+  options(stringsAsFactors=FALSE)
+  x <- do.call(rbind.data.frame, x)
+  options(stringsAsFactors=TRUE)
+  return(x)
+}
+
 #' Get ISO 3166-1 country code.
 #' 
 #' Country identity can be provided as a number or as country name. If the 
@@ -110,3 +138,4 @@ resolve_country <- function(country) {
   }
   return(code)
 }
+

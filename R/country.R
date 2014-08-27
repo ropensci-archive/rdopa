@@ -198,6 +198,6 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
       R.cache::saveCache(r_content, key=key, suffix="respecies.Rcache")
     }
   }
-  dat <- do.call("rbind", r_content$records)
-  return(dat)
+  
+  return(.parse_dopa_response(r_content$records))
 }
