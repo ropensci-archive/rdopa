@@ -21,7 +21,7 @@ cache, \code{"flush"} = Ignore cache if available and save to cache.}
 A data.frame of species whose range intersects with the country. Each
 species has the following information associated to it:
 
-\tabular{rl}{
+\tabular{ll}{
  \code{iucn_species_id} \tab IUCN Species Identifier from the Red List
  website. To find the IUCN Species Identifier, search for a species and then
  look for the number in the URL, e.g. Orang Utan is 17975 \cr
@@ -71,7 +71,7 @@ endangered.kiwi.species <- country_species_list(country="New Zealand",
 Joona Lehtomaki <joona.lehtomaki@gmail.com>
 }
 \seealso{
-\url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_list}
+\url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list}
 
 \code{\link{resolve_country}} \code{\link{check_iucn_status}}
 }

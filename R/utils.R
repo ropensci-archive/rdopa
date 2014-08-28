@@ -67,7 +67,7 @@ check_iucn_status <- function(statuses) {
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #'
-.parse_dopa_response <- function(x) {
+parse_dopa_response <- function(x) {
   x <- lapply(x, function(x) lapply(x, function(x) ifelse(is.null(x), NA, x)))
   
   # [fixme] - Didn't figure out how to pass stringsAsFactors=FALSE in 
