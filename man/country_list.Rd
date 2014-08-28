@@ -5,6 +5,11 @@
 \usage{
 country_list(cache = TRUE)
 }
+\arguments{
+\item{cache}{Sets the cachce mode: \code{TRUE} = Use cache if available and
+save to cache, \code{FALSE} = Ignore cache if available and do not save to
+cache, \code{"flush"} = Ignore cache if available and save to cache.}
+}
 \value{
 data.frame of countries with the following columns:
 

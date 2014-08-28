@@ -1,3 +1,80 @@
+#' Get basic countries data
+#' 
+#' Returns all countries listed in DOPA.
+#' 
+#' @param cache Sets the cachce mode: \code{TRUE} = Use cache if available and 
+#' save to cache, \code{FALSE} = Ignore cache if available and do not save to 
+#' cache, \code{"flush"} = Ignore cache if available and save to cache.
+#' 
+#' @return data.frame of countries with the following columns:
+#' 
+#' \tabular{ll}{
+#'  \code{iso2} \tab The 2 character ISO code. \cr
+#'  \code{iso3} \tab The 3 character ISO code. \cr
+#'  \code{name} \tab The name of the country (english). \cr
+#'  \code{minx} \tab Minimum X of extent of the country. \cr
+#'  \code{miny} \tab Minimum Y of extent of the country. \cr
+#'  \code{maxx} \tab Maximum X of extent of the country. \cr
+#'  \code{maxy} \tab Maximum Y of extent of the country. \cr
+#' }
+#' 
+#' @import httr
+#' @import R.cache
+#' 
+#' @export
+#' 
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list}
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#' 
+#' @examples \dontrun{
+#' 
+#' # Get all countries
+#' country_list()
+#'  
+#' }
+country_list <- function(cache=TRUE) {
+  
+  key <- list("country_list")
+  r_content <- NULL
+  
+  if (cache == TRUE) {
+    r_content <- R.cache::loadCache(key, suffix=.options$cache)
+  }
+  if (!is.null(r_content)) {
+    message("Loaded cached data")
+  } else {
+    
+    # Construct the REST parameters, note that we must use an optional 
+    # did=1 parameter
+    r <- GET("http://dopa-services.jrc.ec.europa.eu",
+             path = "rest/eAdmin/get_country_list",
+             query = list(
+               did = 1
+             ))
+    
+    # Check the request succeeded
+    stop_for_status(r)
+    
+    r_content <- content(r)
+    
+    if (cache == TRUE || cache == 'flush') {
+      R.cache::saveCache(r_content, key=key, suffix=.options$cache)
+    }
+  }
+  
+  country_list <- parse_dopa_response(r_content$records)
+  # Extent coordinates into separate columns
+  extent <- strsplit(country_list$extent, ",")
+  extent <- do.call(rbind, extent)
+  colnames(extent) <- c("minx", "miny", "maxx", "maxy")
+  # Leave out the original extent column
+  country_list <- cbind(country_list[, 1:ncol(country_list) - 1], extent)
+  
+  return(country_list)
+  
+}
+
 #' Get species count for a country
 #' 
 #' Returns a count of the species whose range intersects with the country. This 
@@ -24,7 +101,7 @@
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_count}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count}
 #' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -49,7 +126,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
   r_content <- NULL
   
   if (cache == TRUE) {
-    r_content <- R.cache::loadCache(key, suffix="respecies.Rcache")
+    r_content <- R.cache::loadCache(key, suffix=.options$cache)
   }
   if (!is.null(r_content)) {
     message("Loaded cached data")
@@ -77,7 +154,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
     r_content <- content(r)
     
     if (cache == TRUE || cache == 'flush') {
-      R.cache::saveCache(r_content, key=key, suffix="respecies.Rcache")
+      R.cache::saveCache(r_content, key=key, suffix=.options$cache)
     }
   }
   
@@ -111,7 +188,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' @return A data.frame of species whose range intersects with the country. Each 
 #' species has the following information associated to it:
 #'
-#' \tabular{rl}{
+#' \tabular{ll}{
 #'  \code{iucn_species_id} \tab IUCN Species Identifier from the Red List 
 #'  website. To find the IUCN Species Identifier, search for a species and then 
 #'  look for the number in the URL, e.g. Orang Utan is 17975 \cr
@@ -137,7 +214,6 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'  last assessed \cr
 #'  \code{commonname} \tab No description \cr
 #'  \code{language} \tab No description \cr
-
 #' }
 #' 
 #' @import httr
@@ -145,7 +221,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/especies/get_country_species_list}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list}
 #' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -167,7 +243,7 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
   r_content <- NULL
   
   if (cache == TRUE) {
-    r_content <- R.cache::loadCache(key, suffix="respecies.Rcache")
+    r_content <- R.cache::loadCache(key, suffix=.options$cache)
   }
   if (!is.null(r_content)) {
     message("Loaded cached data")
@@ -195,9 +271,9 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
     r_content <- content(r)
     
     if (cache == TRUE || cache == 'flush') {
-      R.cache::saveCache(r_content, key=key, suffix="respecies.Rcache")
+      R.cache::saveCache(r_content, key=key, suffix=.options$cache)
     }
   }
   
-  return(.parse_dopa_response(r_content$records))
+  return(parse_dopa_response(r_content$records))
 }

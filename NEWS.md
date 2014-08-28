@@ -2,6 +2,7 @@
 
 #### New features
 
++ `country_list()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list)
 + `country_species_list()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list) 
 + Caching mechanism based on package `R.cache`
   - Use `R.cache::clearCache()` to clear the whole cache

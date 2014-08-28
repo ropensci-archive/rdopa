@@ -1,3 +1,27 @@
+context("country_list")
+
+test_that("Arguments are handled correctly", {
+  # Argument country
+  expect_error(country_list(country=NA),
+               info="Using NA for country code should raise an error")
+  expect_error(country_list(country=NULL),
+               info="Using NULL for country code should raise an error")
+})
+
+test_that("API values sane", {
+  
+  # Should return a dataframe
+  expect_is(country_list(cache=FALSE), "data.frame", 
+            "Should return a dataframe")
+  # Check dimensions
+  expect_equivalent(ncol(country_list(cache=FALSE)), 8,
+                    "Invalid number of columns returned")
+  expect_equivalent(nrow(country_list(cache=FALSE)), 242,
+                    "Invalid number of countries returned")
+  
+})
+
+
 context("country_species_count")
 
 test_that("Arguments are handled correctly", {
