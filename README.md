@@ -18,7 +18,12 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 
 ### Installation
 
-#### Requirements
+Install `rdopa` from GitHub using `devtools`.
+
+```r
+install.packages(devtools)
+install_github("jlehtoma/rdopa")
+```
 
 ## Contributors
 
