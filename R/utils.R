@@ -75,6 +75,8 @@ parse_dopa_response <- function(x) {
   options(stringsAsFactors=FALSE)
   x <- do.call(rbind.data.frame, x)
   options(stringsAsFactors=TRUE)
+  # Get rid of rownames
+  row.names(x) <- NULL
   return(x)
 }
 
