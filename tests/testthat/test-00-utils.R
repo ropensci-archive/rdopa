@@ -51,9 +51,9 @@ test_that("DOPA responses are parsed correctly", {
     return(any(unlist(lapply(x, function(x) lapply(x, is.null)))))
   }
   
-  expect_is(.parse_dopa_response(x), "data.frame",
+  expect_is(parse_dopa_response(x), "data.frame",
             "Parsing DOPA response should return a dataframe")
-  expect_false(has.nulls(.parse_dopa_response(x)),
+  expect_false(has.nulls(parse_dopa_response(x)),
                "Parsed DOPA response should not have NULL elements")
   
 })
