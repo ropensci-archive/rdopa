@@ -1,4 +1,8 @@
-## rdopa 0.1.0
+## rdopa 0.1.1
+
++ Package README now includes a up-to-date table of those DOPA services that 
+have a corresponding client function in `rdopa`.
++ Add package vignette.
 
 #### New features
 
@@ -6,6 +10,11 @@
 + `country_species_list()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list) 
 + Caching mechanism based on package `R.cache`
   - Use `R.cache::clearCache()` to clear the whole cache
+
+## rdopa 0.1.0
+
+#### New features
+
 + `country_species_count()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count) 
 for documentation of the method.
 + `resolve_country()` can be used to resolve country names into ISO 3166-1 
