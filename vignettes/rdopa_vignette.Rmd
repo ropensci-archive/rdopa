@@ -1,0 +1,40 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Tutorial for the JRC's eSpecies API}
+-->
+
+```{r setup, echo=FALSE}
+options(width=160)
+```
+
+## Country-level information
+
+### Basic information and statistics
+
+DOPA provides an array of information on species and protected area (PA) 
+occurrence within the borders (or in some cases the Exclusive Economic Zone 
+boundary)  of a given country. `country_list()` can be used to list all the 
+countries available in the DOPA database:
+
+```{r country-list, message=FALSE}
+library(rdopa)
+# We'll also be using package dplyr for data manipulation
+library(dplyr)
+
+cl <- country_list()
+head(cl)
+```
+
+### Species 
+
+There are also few convience function to retrieve species information on 
+conuntry-level. To list species included in a particular 
+[IUCN status category](http://www.iucnredlist.org/technical-documents/categories-and-criteria)
+within a given country, use function `country_species_list()`. For example, if 
+you're interested in all (globally) threatened species (i.e. those in IUCN 
+categories CR, EN, or VU) that occur in Finland, do the following:
+
+```{r species-list-1, message=FALSE}
+threatened.fin <- country_species_list('Finland', rlstatus=c("CR", "EN", "VU"))
+select(threatened.fin, iucn_species_id, taxon, class, status, assessed, commonname)
+```
