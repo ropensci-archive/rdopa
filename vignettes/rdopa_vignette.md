@@ -46,6 +46,7 @@ categories CR, EN, or VU) that occur in Finland, do the following:
 
 ```r
 threatened.fin <- country_species_list('Finland', rlstatus=c("CR", "EN", "VU"))
+# Select only part of the columns (using dplyr)
 select(threatened.fin, iucn_species_id, taxon, class, status, assessed, commonname)
 ```
 
@@ -59,4 +60,47 @@ select(threatened.fin, iucn_species_id, taxon, class, status, assessed, commonna
 ## 6          141555 Polysticta stelleri           Aves     VU 2010-08-28            Steller s Eider
 ## 7           39326   Squalus acanthias Chondrichthyes     VU 2006-01-31                   Blue dog
 ## 8           39332   Squatina squatina Chondrichthyes     CR 2006-01-31                      Angel
+```
+
+Function `country_species_count()` returns the total number of species within
+a given country that belong to a specific status categories. For example, to 
+get the number of threatened species in Brazil:
+
+
+```r
+country_species_count('Brazil', rlstatus=c("CR", "EN", "VU"))
+```
+
+```
+## [1] 285
+```
+
+This - and breakdown into individual categories - can of course be achieved by
+working with the complete country-specific species list:
+
+
+```r
+threatened.bra <- country_species_list('Brazil', rlstatus=c("CR", "EN", "VU"))
+# Total numbet
+nrow(threatened.bra)
+```
+
+```
+## [1] 285
+```
+
+```r
+# Per category (using dplyr)
+threatened.bra %>%
+  group_by(status) %>%
+  summarise(count = n()) 
+```
+
+```
+## Source: local data frame [3 x 2]
+## 
+##   status count
+## 1     CR    43
+## 2     EN    86
+## 3     VU   156
 ```

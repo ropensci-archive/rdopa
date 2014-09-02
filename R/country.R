@@ -83,7 +83,6 @@ country_list <- function(cache=TRUE) {
 #' coastline. The EEZ boundary was derived from the Flanders Marine Institute 
 #' (see \url{http://www.vliz.be/vmdcdata/marbound/} for more information).
 #' 
-
 #' For more information see \url{http://www.iucnredlist.org/technical-documents/categories-and-criteria}.
 #' 
 #' @param country Character country name or numeric country code.
