@@ -10,9 +10,9 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 
 | DOPA Service                       | DOPA tag                           | Function                           |
 |------------------------------------|------------------------------------|------------------------------------|
-| [`get_country_species_count`](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count) | eAdmin | `country_species_count()` |
-| [`get_country_species_list`](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list)| eAdmin | `country_species_list()` |
-| [`get_country_list`](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list)| eAdmin | `country_list()` |
+| [get_country_species_count](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count) | eAdmin | `country_species_count()` |
+| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list)| eAdmin | `country_species_list()` |
+| [get_country_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list)| eAdmin | `country_list()` |
  
 ## Quick start
 
