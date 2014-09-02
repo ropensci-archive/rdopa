@@ -6,7 +6,7 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 
 **Warning** The DOPA API is still very much in development as is this package. Expect things to break.
 
-[DOPA REST Services Directory](http://dopa-services.jrc.ec.europa.eu/rest/) lists all the available services grouped by thematic tags. Currently (in version 0.1.0), the following services are wrapped by `rdopa`:
+[DOPA REST Services Directory](http://dopa-services.jrc.ec.europa.eu/rest/) lists all the available services grouped by thematic tags. Currently, the following services are wrapped by `rdopa`:
 
 | DOPA Service                       | DOPA tag                           | Function                           |
 |------------------------------------|------------------------------------|------------------------------------|
