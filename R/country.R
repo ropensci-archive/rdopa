@@ -213,6 +213,8 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'  last assessed \cr
 #'  \code{commonname} \tab No description \cr
 #'  \code{language} \tab No description \cr
+#'  \code{country_id} \tab Country ISO code \cr
+#'  \code{country_name} \tab Country name \cr
 #' }
 #' 
 #' @import httr
@@ -274,5 +276,10 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
     }
   }
   
-  return(parse_dopa_response(r_content$records))
+  dat <- parse_dopa_response(r_content$records)
+  # Add country information
+  dat$country_id <- resolve_country(country)
+  dat$country_name <- resolve_country(country, full.name=TRUE)
+  
+  return(dat)
 }
