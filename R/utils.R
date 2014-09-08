@@ -90,6 +90,8 @@ parse_dopa_response <- function(x) {
 #' ISO 3166-1 country code (\code{iso3n}).
 #' 
 #' @param country Character country name or numeric country code.
+#' @param full.name Logical should the full name of the country be returned? 
+#'   (default: FALSE)
 
 #' @return Numeric count of the species whose range intersects with the country.
 #' 
@@ -108,11 +110,13 @@ parse_dopa_response <- function(x) {
 #'   
 #' # Using country code (156 is China)
 #' code <- resolve_country(156)
+#' # Getting the full name
+#' country.name <- resolve_country(156, full.name=TRUE)
 #' 
 #' # Country code can be provided as a character string as well
 #' code <- resolve_country("156")
 #'
-resolve_country <- function(country) {
+resolve_country <- function(country, full.name=FALSE) {
   
   # Check if country is string that can be coerced to a numeric
   if (suppressWarnings(!is.na(as.numeric(country)))) {
@@ -121,11 +125,13 @@ resolve_country <- function(country) {
   
   # If country is provided as a country name, try to convert it to a ISO code
   if (is.character(country)) {
-    origin <- "country.name"
-    destination <- "iso3n"
-    # Must coerce to numeric, will give integer otherwise
-    code <- as.numeric(countrycode(country, "country.name", "iso3n"))
-    if (is.na(code)) {
+    if (full.name) {
+      token <- countrycode(country, "country.name", "country.name")
+    } else {
+      # Must coerce to numeric, will give integer otherwise
+      token <- as.numeric(countrycode(country, "country.name", "iso3n"))
+    }
+    if (is.na(token)) {
       stop("Country name ", country, " was not matched to an ISO code.")
     }
   } else if (is.numeric(country)) {
@@ -133,11 +139,15 @@ resolve_country <- function(country) {
     if (!country %in% countrycode_data$iso3n) {
       stop("Country code ", country, " not a valid ISO 3166-1 code")
     } else {
-      code  <- country
+      if (full.name) {
+        token <- countrycode(country, "iso3n", "country.name")
+      } else {
+        token <- country
+      }
     }
   } else {
     stop("country must be either string country name of numeric country code")
   }
-  return(code)
+  return(token)
 }
 

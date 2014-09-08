@@ -3,11 +3,19 @@ context("Package utility functions")
 test_that("Country codes are handled correctly", {  
   # China, country code should work as a string and numeric
   expect_identical(resolve_country(country="156"), 156,
-               "Contry code as character is not resolved correctly")
+               "Contry code as character is not resolved correctly to code")
   expect_identical(resolve_country(country=156), 156,
-               "Contry code as numeric is not resolved correctly")
+               "Contry code as numeric is not resolved correctly to code")
   expect_identical(resolve_country(country="Finland"), 246,
-               "Contry name is not resolved correctly")
+               "Contry name is not resolved correctly to code")
+  
+  # Using full names
+  expect_identical(resolve_country(country="156", full.name=TRUE), "China",
+                   "Contry code as character is not resolved correctly to full name")
+  expect_identical(resolve_country(country=156, full.name=TRUE), "China",
+                   "Contry code as numeric is not resolved correctly to full name")
+  expect_identical(resolve_country(country="Finland", full.name=TRUE), "Finland",
+                   "Contry name is not resolved correctly to full name")
 })
 
 test_that("Non-existing country names and codes raise an error", {
