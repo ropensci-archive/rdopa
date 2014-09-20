@@ -24,15 +24,15 @@
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #' 
-#' @examples
-#' 
+#' @examples \dontrun{
 #' check_iucn_status("EN")
 #' check_iucn_status(c("EN", "VU"))
 #' # Gives a warning
-#' check_iucn_status(c("EN", "BB))
+#' check_iucn_status(c("EN", "BB"))
 #' # Fails
 #' check_iucn_status("ENX")
-#'
+#' }
+#' 
 check_iucn_status <- function(statuses) {
   valid <- c()
   for (status in statuses) {
