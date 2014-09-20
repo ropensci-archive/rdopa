@@ -53,10 +53,19 @@ working with the complete country-specific species list:
 
 ```{r species-list-2, message=FALSE}
 threatened.bra <- country_species_list('Brazil', rlstatus=c("CR", "EN", "VU"))
-# Total numbet
+# Total number
 nrow(threatened.bra)
 # Per category (using dplyr)
 threatened.bra %>%
   group_by(status) %>%
   summarise(count = n()) 
+```
+
+### Protected areas
+
+Protected area (PA) statistics are available according to 
+[IUCN PA categories](http://www.iucn.org/about/work/programmes/gpap_home/gpap_quality/gpap_pacategories/):
+
+```{r country-stats, message=FALSE}
+country_stats("Sweden")
 ```
