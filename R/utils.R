@@ -43,7 +43,11 @@ check_iucn_status <- function(statuses) {
     }
   }
   if (length(valid) == 0) {
-    stop("None of the provided codes are valid IUCN status codes")
+    if (length(statuses) > 1) {
+      stop("None of the provided codes are valid IUCN status codes")
+    } else {
+      stop("Provided code is not a valid IUCN status code")
+    }
   }
   return(valid)
 }
