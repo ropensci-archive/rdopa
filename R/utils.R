@@ -52,6 +52,32 @@ check_iucn_status <- function(statuses) {
   return(valid)
 }
 
+#' Get IUCN protected area categories
+#' 
+#' @return A dataframe of IUCN protected area categories
+#' 
+#' @keywords internal
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#'
+get_iucn_pa_categories <- function(){
+  
+  iucn_pa_categories <- data.frame(iucn_cat=c("0", "Ia", "Ib", "II", "III", 
+                                              "IV", "V", "VI", "Not Reported",
+                                              "Not Applicable"),
+                                   desc=c("Unknkown",
+                                          "Strict Nature Reserve",
+                                          "Wilderness Area",
+                                          "National park",
+                                          "Natural Monument or Feature",
+                                          "Habitat/Species Management Area",
+                                          "Protected Landscape/ Seascape",
+                                          "Protected area with sustainable use of natural resources",
+                                          "",""),
+                                   category=0:9)
+  return(iucn_pa_categories)
+}
+
 #' Coerce a DOPA response object into a dataframe
 #' 
 #' DOPA responses are often structured as lists of lists. Turn this into a 
