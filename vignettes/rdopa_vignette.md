@@ -81,7 +81,7 @@ working with the complete country-specific species list:
 
 ```r
 threatened.bra <- country_species_list('Brazil', rlstatus=c("CR", "EN", "VU"))
-# Total numbet
+# Total number
 nrow(threatened.bra)
 ```
 
@@ -103,4 +103,28 @@ threatened.bra %>%
 ## 1     CR    43
 ## 2     EN    86
 ## 3     VU   156
+```
+
+### Protected areas
+
+Protected area (PA) statistics are available according to 
+[IUCN PA categories](http://www.iucn.org/about/work/programmes/gpap_home/gpap_quality/gpap_pacategories/):
+
+
+```r
+country_stats("Sweden")
+```
+
+```
+##    category area_protected area_protected_perc area_total countryiso   name       iucn_cat
+## 1         0          61291               13.69     449211        752 Sweden              0
+## 2         1          31764                7.10     449211        752 Sweden             Ib
+## 3         2           2482                0.55     449211        752 Sweden             Ia
+## 4         3           6874                1.54     449211        752 Sweden             II
+## 5         4            267                0.06     449211        752 Sweden            III
+## 6         5            809                0.18     449211        752 Sweden             IV
+## 7         6           3535                0.79     449211        752 Sweden              V
+## 8         7             NA                  NA     449211        752 Sweden             VI
+## 9         8           3514                0.79     449211        752 Sweden   Not Reported
+## 10        9          12046                2.69     449211        752 Sweden Not Applicable
 ```
