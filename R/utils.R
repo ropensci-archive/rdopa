@@ -26,14 +26,12 @@
 #' 
 #' @examples
 #' 
-#' # Using country name
-#' code <- resolve_country("Finland")
-#'   
-#' # Using country code (156 is China)
-#' code <- resolve_country(156)
-#' 
-#' # Country code can be provided as a character string as well
-#' code <- resolve_country("156")
+#' check_iucn_status("EN")
+#' check_iucn_status(c("EN", "VU"))
+#' # Gives a warning
+#' check_iucn_status(c("EN", "BB))
+#' # Fails
+#' check_iucn_status("ENX")
 #'
 check_iucn_status <- function(statuses) {
   valid <- c()
