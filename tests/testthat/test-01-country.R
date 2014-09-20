@@ -21,7 +21,6 @@ test_that("API values sane", {
   
 })
 
-
 context("country_species_count")
 
 test_that("Arguments are handled correctly", {
@@ -123,6 +122,10 @@ test_that("API values sane", {
                     "California quail common name is wrong")
   expect_equivalent(spp$language, "english",
                     "California quail assessment language is wrong")
+  expect_equivalent(spp$country_id, 554,
+                    "Country ISO code not correct")
+  expect_equivalent(spp$country_name, "New Zealand",
+                     "Country name code not correct")
   
   # Test the rlstatus argument
   kiwi.species.cr <- country_species_list(country="New Zealand", rlstatus="CR",
