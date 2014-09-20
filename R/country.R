@@ -89,7 +89,7 @@ country_list <- function(cache=TRUE) {
 #' @param rlstatus A character vector of the IUCN Conservation Status for the 
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.
-#' @param cache Sets the cachce mode: \code{TRUE} = Use cache if available and 
+#' @param cache Sets the cache mode: \code{TRUE} = Use cache if available and 
 #' save to cache, \code{FALSE} = Ignore cache if available and do not save to 
 #' cache, \code{"flush"} = Ignore cache if available and save to cache.
 #' 
@@ -180,7 +180,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.  For more information see 
 #'   \href{http://www.iucnredlist.org/technical-documents/categories-and-criteria}{here}.
-#' @param cache Sets the cachce mode: \code{TRUE} = Use cache if available and 
+#' @param cache Sets the cache mode: \code{TRUE} = Use cache if available and 
 #' save to cache, \code{FALSE} = Ignore cache if available and do not save to 
 #' cache, \code{"flush"} = Ignore cache if available and save to cache.
 #' 
@@ -280,6 +280,103 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
   # Add country information
   dat$country_id <- resolve_country(country)
   dat$country_name <- resolve_country(country, full.name=TRUE)
+  
+  return(dat)
+}
+
+#' Get country statistics
+#' 
+#' Returns the country core statistics associated to the amount of PAs in 
+#' different IUCN categories.
+#' 
+#' If a country has no area designated to a particulart IUCN category, 
+#' The DOPA API will leave the category out of the response. 
+#' \code{country_stats()} returns all categories, populationg 
+#' non-existant with NAs.
+#' 
+#' @param country Character country name or numeric country code.
+#' @param cache Sets the cache mode: \code{TRUE} = Use cache if available and 
+#' save to cache, \code{FALSE} = Ignore cache if available and do not save to 
+#' cache, \code{"flush"} = Ignore cache if available and save to cache.
+#' 
+#' @return A data.frame of country PA statistics. Each 
+#' species has the following information associated to it:
+#'
+#' \tabular{ll}{
+#'  \code{category} \tab IThe category for the iucn protection level \cr
+#'  \code{area_protected} \tab The protected area of the country \cr
+#'  \code{area_protected_perc} \tab The protected area percentage of the 
+#'  country \cr
+#'  \code{area_total} \tab The total area of the country \cr
+#'  \code{countryiso} \tab The ISO numeric code of the country \cr
+#'  \code{name} \tab The name of the country \cr
+#'  \code{iucn_cat} \tab The numeric id for the iucn protection level \cr
+#' }
+#' 
+#' @import httr
+#' @import R.cache
+#' 
+#' @export
+#' 
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats}
+#' @seealso \code{\link{resolve_country}}
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#' 
+#' @examples \dontrun{
+#' # Get PA statistics for Sweden
+#' country_stats(country="Sweden")
+#' }
+country_stats <- function(country, cache=FALSE){
+  code <- resolve_country(country)
+  
+  key <- list("country_stats", code)
+  r_content <- NULL
+  
+  if (cache == TRUE) {
+    r_content <- R.cache::loadCache(key, suffix=.options$cache)
+  }
+  if (!is.null(r_content)) {
+    message("Loaded cached data")
+  } else {
+    
+    # Construct the REST parameters
+    r <- GET("http://dopa-services.jrc.ec.europa.eu",
+             path = "rest/eAdmin/get_country_stats",
+             query = list(
+               country_id = code
+             ))
+   
+    # Check the request succeeded
+    stop_for_status(r)
+    
+    r_content <- content(r)
+    
+    if (cache == TRUE || cache == 'flush') {
+      R.cache::saveCache(r_content, key=key, suffix=.options$cache)
+    }
+  }
+  
+  dat <- parse_dopa_response(r_content$records)
+  #browser()
+  # Check that all categories are there. If not, fill in the missing rows.
+  cats <- get_iucn_pa_categories()
+  if (nrow(dat) != nrow(cats)){
+    # Which categories are missing?
+    missing <- cats[!cats$iucn_cat %in% dat$iucn_cat,]
+    # Fill in the data
+    missing_cats <- data.frame(category=missing$category,
+                               area_protected=NA,
+                               area_protected_perc=NA,
+                               area_total=dat[1,]$area_total,
+                               countryiso=dat[1,]$countryiso,
+                               name=dat[1,]$name,
+                               iucn_cat=missing$iucn_cat)
+    dat <- rbind(dat, missing_cats)
+    # Sort by category
+    dat <- dat[with(dat, order(category)), ]
+    row.names(dat) <- NULL
+  }
   
   return(dat)
 }

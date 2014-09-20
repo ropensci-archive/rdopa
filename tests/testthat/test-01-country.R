@@ -137,3 +137,23 @@ test_that("API values sane", {
   expect_equal(nrow(kiwi.species.cr.en), 39)
   
 })
+
+context("country_species_stats")
+
+test_that("Arguments are handled correctly", {
+  # Argument country
+  expect_error(country_stats(country=NA),
+               info="Using NA for country code should raise an error")
+  expect_error(country_stats(country=NULL),
+               info="Using NULL for country code should raise an error")
+})
+
+test_that("API values sane", {
+  
+  # Get test data from Japan
+  japan.stats <- country_stats(country="Japan", cache=FALSE)
+  
+  # Stats should include 10 categories
+  expect_equal(nrow(japan.stats), 10)
+  
+})
