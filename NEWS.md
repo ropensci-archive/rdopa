@@ -1,3 +1,16 @@
+## rdopa 0.1.2
+
+#### New features
+
++ `country_stats()` implemented, see [here](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats)
+
+#### Bug fixes
+
++ `resolve_country()` accepts an argument `full.name=TRUE` to return the full
+name of the country.
++ `country_species_list()` now returns country information (name and ISO code)
+in the dataframe.
+
 ## rdopa 0.1.1
 
 + Package README now includes a up-to-date table of those DOPA services that 
