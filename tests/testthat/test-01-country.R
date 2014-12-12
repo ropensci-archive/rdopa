@@ -14,9 +14,9 @@ test_that("API values sane", {
   expect_is(country_list(cache=FALSE), "data.frame", 
             "Should return a dataframe")
   # Check dimensions
-  expect_equivalent(ncol(country_list(cache=FALSE)), 8,
+  expect_equivalent(ncol(country_list(cache=FALSE)), 9,
                     "Invalid number of columns returned")
-  expect_equivalent(nrow(country_list(cache=FALSE)), 242,
+  expect_equivalent(nrow(country_list(cache=FALSE)), 241,
                     "Invalid number of countries returned")
   
 })
@@ -35,7 +35,7 @@ test_that("API values sane", {
   
   # Expect an integer
   expect_is(country_species_count(country="Finland", rlstatus="DD",
-                                  cache=FALSE), "numeric")
+                                  cache=FALSE), "integer")
   
   # Slightly pointless check since we don't (and don't want to) check 
   # all the possible country/rlstatus combinations
