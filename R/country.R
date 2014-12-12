@@ -12,6 +12,7 @@
 #'  \code{iso2} \tab The 2 character ISO code. \cr
 #'  \code{iso3} \tab The 3 character ISO code. \cr
 #'  \code{name} \tab The name of the country (english). \cr
+#'  \code{gec} \tab The GEC code (deprecated) used by the CIA World Factbook. \cr
 #'  \code{minx} \tab Minimum X of extent of the country. \cr
 #'  \code{miny} \tab Minimum Y of extent of the country. \cr
 #'  \code{maxx} \tab Maximum X of extent of the country. \cr
