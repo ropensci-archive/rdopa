@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Tutorial for the JRC's eSpecies API}
@@ -5,7 +8,6 @@
 
 
 
-## Country-level information
 
 ### Basic information and statistics
 
@@ -107,7 +109,7 @@ threatened.bra %>%
 
 ### Protected areas
 
-Protected area (PA) statistics are available according to 
+Protected area (PA) statistics are available per country according to 
 [IUCN PA categories](http://www.iucn.org/about/work/programmes/gpap_home/gpap_quality/gpap_pacategories/):
 
 
@@ -128,3 +130,73 @@ country_stats("Sweden")
 ## 9         8           3514                0.79     449211        752 Sweden   Not Reported
 ## 10        9          12046                2.69     449211        752 Sweden Not Applicable
 ```
+
+Within a given country, statistics for individual PAs can be retrieved using
+`pa_country_stats()`. Let's find out all the PAs within Uganda:
+
+
+```r
+uganda_pa_stats <- pa_country_stats("Uganda")
+nrow(uganda_pa_stats)
+```
+
+```
+## [1] 28
+```
+
+So Uganda has 28 individual PAs in the WDPA. The data returned from DOPA 
+includes several metrics and a [WKT](https://en.wikipedia.org/wiki/Well-known_text) 
+representation of the PA boundaries. In other words, we can also plot the
+PAs on a map, but first we must do some conversion using the utility function
+`wktdf2sp()`:
+
+
+```r
+# Load spatial libraries
+library(ggmap)
+library(maptools)
+
+# First, convert the data into a SpatialPolygonsDataFrame
+sp_pa_uganda <- wktdf2sp(uganda_pa_stats, wkt.col="wdpa_wkt")
+
+# Let's get a background map using ggmap
+map_uganda <- get_map(location=bbox(sp_pa_uganda), zoom=7)
+```
+
+```
+## Warning: bounding box given to google - spatial extent only approximate.
+```
+
+```r
+ggmap(map_uganda) + geom_polygon(data = sp_pa_uganda,
+                            aes(x = long, 
+                                y = lat, group=group), fill="darkgreen",
+                            color ="white", alpha = .8, size = .2)
+```
+
+![plot of chunk country-pa_stats_map-1](figure/country-pa_stats_map-1-1.png) 
+
+Now we also create chloropleth maps using the the DOPA data. Let's visualize 
+the Habitat Replaceability Index (HRI) which is the ratio between
+similar areas outside park and the park itself, that can be used for
+characterizing the uniqueness of each protected area. Using `ggmap` and 
+`ggplot2` will take some mangling first:
+
+
+```r
+# Fortify the spatial data
+data_pa_uganda <- fortify(sp_pa_uganda)
+# Combine the fortified data with the actual attribute data. NOTE! This is 
+# a bit of a hack as the relation between polygon id and FID is implicit.
+data_pa_uganda <- merge(data_pa_uganda, as.data.frame(sp_pa_uganda),
+                        by.x="id", by.y="FID")
+
+# Apply some graphical styling too
+library(RColorBrewer)
+ggmap(map_uganda, darken=0.2) + geom_polygon(data = data_pa_uganda,
+                            aes(x = long, y = lat, group=group, fill=hri),
+                            color ="black", alpha = .9, size = .2) +
+  scale_fill_gradientn(colours = rev(brewer.pal(9, "Spectral")))
+```
+
+![plot of chunk country-pa_stats_map-2](figure/country-pa_stats_map-2-1.png) 
