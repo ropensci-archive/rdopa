@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jlehtoma/rdopa.svg?branch=master)](https://travis-ci.org/jlehtoma/respecies)
+[![Build Status](https://travis-ci.org/jlehtoma/rdopa.svg?branch=master)](https://travis-ci.org/jlehtoma/rdopa)
 
 ## rdopa
 
