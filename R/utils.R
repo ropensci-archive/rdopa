@@ -179,3 +179,50 @@ resolve_country <- function(country, full.name=FALSE) {
   return(token)
 }
 
+#' Convert a data frame with a WKT column into SpatialPolygonsDataFrame.
+#' 
+#' Many queries to the DOPA API return a response object that has the spatial
+#' geometry stored as a WKT MULTIPOLYGON data. This function converts the
+#' input data frame into a SpatialPolygonsDataFrame.
+#' 
+#' @details A functional installation of \code{rgeos} is needed.
+#' 
+#' @param x Data frame containing all the necessary data.
+#' @param wkt.col Character string name of the column containing the WKT data.
+#' @param p4s Either a character string or an object of class CRS.
+#'   (default: "+init=epsg:4326")
+
+#' @return A SpatialPolygonsDataFrame.
+#' 
+#' @import rgeos sp
+#' 
+#' @export 
+#' 
+#' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
+#'
+#'
+wktdf2sp <- function(x, wkt.col, p4s="+init=epsg:4326") {
+  
+  if (!wkt.col %in% names(x)) {
+    stop(wkt.col, " not a valid column name")
+  }
+  
+  # Insert new polygons into a list
+  spatial_polygons <- list()
+
+  for (i in 1:nrow(x)) {
+    # Select all columns for the current row except the WKT column
+    x_data <- x[-which(names(x) == wkt.col)][i,]
+    # Generate FID based on the current row index
+    x_data$FID <- i
+    # Use current row index as the polygon ID
+    x_poly <- readWKT(x[i,][[wkt.col]], p4s=p4s, id=i)
+    #browser()
+    spatial_polygons[[i]] <- SpatialPolygonsDataFrame(x_poly, data=x_data,
+                                                      match.ID="FID")
+  }
+  # Bind everything together
+  spatial_polygons <- do.call("rbind", spatial_polygons)
+  proj4string(spatial_polygons) <- 
+  return(spatial_polygons)
+}

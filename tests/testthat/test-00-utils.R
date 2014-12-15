@@ -65,3 +65,34 @@ test_that("DOPA responses are parsed correctly", {
                "Parsed DOPA response should not have NULL elements")
   
 })
+
+test_that("Data frame with WKT is converted correctly", {
+  
+  suppressMessages(library(rgeos))
+  suppressMessages(library(sp))
+  
+  # Create some test data
+  x <- data.frame("ID"=c(1, 2, 3), "var1"=c("A", "B", "C"), 
+                  "WKT"=c("MULTIPOLYGON(((1.0 2.0, 1.0 3.0, 2.0 3.0, 1.0 2.0)))",
+                          "MULTIPOLYGON(((3.0 4.0, 3.0 5.0, 4.0 5.0, 3.0 4.0)))",
+                          "MULTIPOLYGON(((11.0 12.0, 11.0 13.0, 12.0 13.0, 11.0 12.0)))"),
+                  stringsAsFactors=FALSE)
+  
+  # Erraneous column name for the WKT field
+  expect_error(sp_x <- wktdf2sp(x, wkt.col="WKTXX"),
+               info="Missing column name should give an error")
+  
+  sp_x <- wktdf2sp(x, wkt.col="WKT")
+  
+  expect_is(sp_x, "SpatialPolygonsDataFrame",
+            info="Returned object is not SpatialPolygonsDataFrame")
+  
+  # Check all 3 rows
+  for (i in 1:nrow(x)) {
+    expect_true(gEqualsExact(readWKT(text = x[i,]$WKT, p4s="+init=epsg:4326"), 
+                             sp_x[[i]]),
+                info="Geometries are not the same")
+  }
+  
+})
+
