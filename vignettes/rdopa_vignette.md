@@ -1,14 +1,3 @@
----
-output: html_document
----
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Tutorial for the JRC's eSpecies API}
--->
-
-
-
-
 ### Basic information and statistics
 
 DOPA provides an array of information on species and protected area (PA) 
