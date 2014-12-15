@@ -1,3 +1,16 @@
+## rdopa 0.1.3
+
+#### New features
+
++ `country_list()` has new column, `gec`.
++ `pa_country_stats()` implemented.
++ New utility function `wktdf2sp()` that can be used to convert DOPA
+responses with WKT column into sp-objects.
+
+#### Bug fixes
+
++ Tests updated
+
 ## rdopa 0.1.2
 
 #### New features
