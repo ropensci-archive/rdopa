@@ -90,7 +90,7 @@ test_that("Data frame with WKT is converted correctly", {
   # Check all 3 rows
   for (i in 1:nrow(x)) {
     expect_true(gEqualsExact(readWKT(text = x[i,]$WKT, p4s="+init=epsg:4326"), 
-                             sp_x[[i]]),
+                             sp_x[i,]),
                 info="Geometries are not the same")
   }
   
