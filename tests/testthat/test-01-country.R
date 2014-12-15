@@ -64,14 +64,16 @@ test_that("API values sane", {
 test_that("Cache works", {
   
   # Cache the response
-  cached_1 <- country_species_count(country="Finland", rlstatus="LC",
-                                   cache=TRUE)
+  suppressMessages(cached_1 <- country_species_count(country="Finland", 
+                                                     rlstatus="LC",
+                                                     cache=TRUE))
   # Ignore the cache
   fresh_data <- country_species_count(country="Finland", rlstatus="LC",
                                       cache=FALSE)
   # Load from cache and compare to the previous data
-  cached_2 <- country_species_count(country="Finland", rlstatus="LC",
-                                    cache=TRUE)
+  suppressMessages(cached_2 <- country_species_count(country="Finland", 
+                                                     rlstatus="LC",
+                                                     cache=TRUE))
   expect_identical(cached_1, cached_2,
                    "Cached values should be the same")
   # Compare to the fresh data
@@ -156,4 +158,55 @@ test_that("API values sane", {
   # Stats should include 10 categories
   expect_equal(nrow(japan.stats), 10)
   
+})
+
+context("pa_country_stats")
+
+test_that("Arguments are handled correctly", {
+  # Argument country
+  expect_error(pa_country_stats(country_id=NA),
+               info="Using NA for country code should raise an error")
+  expect_error(pa_country_stats(country_id=NULL),
+               info="Using NULL for country code should raise an error")
+})
+
+test_that("API values sane", {
+  
+  # Only test for an individual PA within a country, testing for all would
+  # be tedious. Also, don't test the WKT MULTIPOLYGON.
+  
+  # Get test data from Uganda
+  uganda.stats <- pa_country_stats(country="Uganda", cache=FALSE)
+  expect_is(uganda.stats, "data.frame",
+            "Returned object is not a data frame")
+
+  # Stats should include 10 categories
+  expect_equal(dim(uganda.stats), c(28, 13),
+               info="Dimensions for returned data frame are incorrect")
+  # Check a single PA
+  pian_upe <- uganda.stats[1,]
+  expect_equivalent(pian_upe$wdpaid, 1435,
+                    "WDPAID for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$iucn_cat, "III",
+                    "IUCN category for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$extent, "34.2144200000001,1.52357000000006,34.7992400000001,2.25289000000009",
+                    "Extent for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$name, "Pian Upe",
+                    "Name for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$hriwdpaid, 1435,
+                    "HRIWDPAID for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$hri, 2.6,
+                    "HRI for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$area, 2304,
+                    "Area for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$sri, 23.81,
+                    "SRI for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$pi, 20.39,
+                    "PI for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$ap, 43.27,
+                    "AP for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$gis_area, 2153,
+                    "GIS area for Pian Upe (Uganda) is wrong")
+  expect_equivalent(pian_upe$numterrsegms, 5,
+                    "NUMTERRSEGMS for Pian Upe (Uganda) is wrong")
 })
