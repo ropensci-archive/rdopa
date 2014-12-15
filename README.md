@@ -27,6 +27,10 @@ install.packages(devtools)
 install_github("jlehtoma/rdopa")
 ```
 
+### Usage
+
+Check out examples in the package [vignette](https://github.com/jlehtoma/rdopa/blob/master/vignettes/rdopa_vignette.md).
+
 ## Contributors
 
 + [Joona Lehtomäki](https://github.com/jlehtoma) <joona.lehtomaki@gmail.com>
