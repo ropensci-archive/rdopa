@@ -223,6 +223,5 @@ wktdf2sp <- function(x, wkt.col, p4s="+init=epsg:4326") {
   }
   # Bind everything together
   spatial_polygons <- do.call("rbind", spatial_polygons)
-  proj4string(spatial_polygons) <- 
   return(spatial_polygons)
 }
