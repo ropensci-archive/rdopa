@@ -34,3 +34,11 @@ Check out examples in the package [vignette](https://github.com/jlehtoma/rdopa/b
 ## Contributors
 
 + [Joona Lehtomäki](https://github.com/jlehtoma) <joona.lehtomaki@gmail.com>
+
+## Meta
+
+* Please [report any issues or bugs](https://github.com/ropensci/rdopa/issues)
+* License: CC0
+* Get citation information for `rdopa` in R doing `citation(package = 'rdopa')`
+
+[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
