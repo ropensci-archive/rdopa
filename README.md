@@ -24,7 +24,7 @@ Install `rdopa` from GitHub using `devtools`.
 
 ```r
 install.packages(devtools)
-install_github("jlehtoma/rdopa")
+install_github("ropensci/rdopa")
 ```
 
 ### Usage
