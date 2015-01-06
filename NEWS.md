@@ -1,5 +1,7 @@
 ## rdopa 0.1.3
 
++ Change license to MIT
+
 #### New features
 
 + `country_list()` has new column, `gec`.
