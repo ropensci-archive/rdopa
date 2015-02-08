@@ -8,9 +8,13 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 
 [DOPA REST Services Directory](http://dopa-services.jrc.ec.europa.eu/rest/) lists all the available services grouped by thematic tags. Currently, the following services are wrapped by `rdopa`:
 
-| DOPA Service                       | Function                           |
-|------------------------------------|------------------------------------|
-| [http://dev.kansanmuisti.fi/api/v1/term](http://dev.kansanmuisti.fi/static/api_v1_doc/index.html#api-Term) | `term()` |
+| DOPA Servic                      | DOPA tag                           | Function                           |
+|------------------------------------|------------------------------------|------------------------------------|
+| [get_country_species_count](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count) | eAdmin | `country_species_count()` |
+| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list)| eAdmin | `country_species_list()` |
+| [get_country_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list)| eAdmin | `country_list()` |
+| [get_country_stats](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats)| eAdmin | `country_stats()` |
+| [get_pa_country_stats](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_pa_country_stats)| eAdmin | `pa_country_stats()` | 
 
 ## Quick start
 
