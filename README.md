@@ -6,15 +6,15 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 
 **Warning** The DOPA API is still very much in development as is this package. Expect things to break.
 
-[DOPA REST Services Directory](http://dopa-services.jrc.ec.europa.eu/rest/) lists all the available services grouped by thematic tags. Currently, the following services are wrapped by `rdopa`:
+[DOPA REST Services Directory](http://dopa-services.jrc.ec.europa.eu/services/) lists all the available services grouped by respective databases. Currently, the following services are wrapped by `rdopa`:
 
-| DOPA Servic                      | DOPA tag                           | Function                           |
-|------------------------------------|------------------------------------|------------------------------------|
-| [get_country_species_count](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count) | eAdmin | `country_species_count()` |
-| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list)| eAdmin | `country_species_list()` |
-| [get_country_list](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list)| eAdmin | `country_list()` |
-| [get_country_stats](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats)| eAdmin | `country_stats()` |
-| [get_pa_country_stats](http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_pa_country_stats)| eAdmin | `pa_country_stats()` | 
+| DOPA Service        | DOPA database | DOPA schema                           | Function                           |
+|------------------------------------|-----|-------------------------------|------------------------------------|
+| [get_country_species_count](http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_count) | dopa | especies | `country_species_count()` |
+| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_list)| dopa | especies | `country_species_list()` |
+| [get_country_list](http://dopa-services.jrc.ec.europa.eu/services/dopa/ehabitat/get_country_list)| dopa | ehabitat | `country_list()` |
+| [get_country_stats](http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_country_stats_all)| ibex | ehabitat | `country_stats()` |
+| [get_pa_country_stats](ttp://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_pa_country_stats) | ibex | especies | `pa_country_stats()` | 
 
 ## Quick start
 
