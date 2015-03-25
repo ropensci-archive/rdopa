@@ -1,3 +1,9 @@
+## rdopa 0.1.4
+
+#### Bug fixes
+
++ Fix changed REST URLs.
+
 ## rdopa 0.1.3
 
 + Change license to MIT

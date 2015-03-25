@@ -181,10 +181,10 @@ test_that("API values sane", {
             "Returned object is not a data frame")
 
   # Stats should include 10 categories
-  expect_equal(dim(uganda.stats), c(28, 13),
+  expect_equal(dim(uganda.stats), c(58, 18),
                info="Dimensions for returned data frame are incorrect")
   # Check a single PA
-  pian_upe <- uganda.stats[1,]
+  pian_upe <- uganda.stats[3,]
   expect_equivalent(pian_upe$wdpaid, 1435,
                     "WDPAID for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$iucn_cat, "III",
@@ -193,20 +193,14 @@ test_that("API values sane", {
                     "Extent for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$name, "Pian Upe",
                     "Name for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$hriwdpaid, 1435,
-                    "HRIWDPAID for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$hri, 2.6,
-                    "HRI for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$area, 2304,
+  expect_equivalent(pian_upe$area, 2154,
                     "Area for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$sri, 23.81,
-                    "SRI for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$pi, 20.39,
+  expect_equivalent(pian_upe$pi, 14.45,
                     "PI for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$ap, 43.27,
                     "AP for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$gis_area, 2153,
+  expect_equivalent(pian_upe$gis_area, 2154,
                     "GIS area for Pian Upe (Uganda) is wrong")
-  expect_equivalent(pian_upe$numterrsegms, 5,
+  expect_equivalent(pian_upe$numterrsegms, 3.39,
                     "NUMTERRSEGMS for Pian Upe (Uganda) is wrong")
 })

@@ -24,7 +24,7 @@
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/dopa/ehabitat/get_country_list}
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
 #' 
@@ -49,7 +49,7 @@ country_list <- function(cache=TRUE) {
     # Construct the REST parameters, note that we must use an optional 
     # did=1 parameter
     r <- GET("http://dopa-services.jrc.ec.europa.eu",
-             path = "rest/eAdmin/get_country_list",
+             path = "services/dopa/ehabitat/get_country_list",
              query = list(
                did = 1
              ))
@@ -101,7 +101,7 @@ country_list <- function(cache=TRUE) {
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_count}
 #' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -135,14 +135,14 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
     # Construct the REST parameters
     if (is.null(rlstatus)) {
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "rest/eAdmin/get_country_species_count",
+               path = "services/dopa/especies/get_country_species_count",
                query = list(
                 country_id = code
                ))
     } else {
       rlstatus <- check_iucn_status(rlstatus)
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "rest/eAdmin/get_country_species_count",
+               path = "services/dopa/especies/get_country_species_count",
                query = list(
                  country_id = code,
                  rlstatus = paste(rlstatus, collapse=",")
@@ -223,7 +223,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_list}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_list}
 #' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -254,14 +254,14 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
     # Construct the REST parameters
     if (is.null(rlstatus)) {
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "rest/eAdmin/get_country_species_list",
+               path = "services/dopa/especies/get_country_species_list",
                query = list(
                  country_id = code
                ))
     } else {
       rlstatus <- check_iucn_status(rlstatus)
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "rest/eAdmin/get_country_species_list",
+               path = "services/dopa/especies/get_country_species_list",
                query = list(
                  country_id = code,
                  rlstatus = paste(rlstatus, collapse=",")
@@ -319,7 +319,7 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_country_stats_all}
 #' @seealso \code{\link{resolve_country}}
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -343,7 +343,7 @@ country_stats <- function(country, cache=FALSE){
     
     # Construct the REST parameters
     r <- GET("http://dopa-services.jrc.ec.europa.eu",
-             path = "rest/eAdmin/get_country_stats",
+             path = "services/ibex/ehabitat/get_country_stats_all",
              query = list(
                country_id = code
              ))
@@ -419,7 +419,7 @@ country_stats <- function(country, cache=FALSE){
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_pa_country_stats}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_pa_country_stats}
 #' @seealso \code{\link{resolve_country}}
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -444,7 +444,7 @@ pa_country_stats <- function(country, cache=FALSE){
     
     # Construct the REST parameters
     r <- GET("http://dopa-services.jrc.ec.europa.eu",
-             path = "rest/eAdmin/get_pa_country_stats",
+             path = "services/ibex/ehabitat/get_pa_country_stats",
              query = list(
                country_id = code
              ))
