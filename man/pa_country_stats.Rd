@@ -50,7 +50,7 @@ pa_country_stats(country="Uganda")
 Joona Lehtomaki <joona.lehtomaki@gmail.com>
 }
 \seealso{
-\url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_pa_country_stats}
+\url{http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_pa_country_stats}
 
 \code{\link{resolve_country}}
 }

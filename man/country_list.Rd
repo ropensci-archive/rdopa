@@ -40,6 +40,6 @@ country_list()
 Joona Lehtomaki <joona.lehtomaki@gmail.com>
 }
 \seealso{
-\url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_list}
+\url{http://dopa-services.jrc.ec.europa.eu/services/dopa/ehabitat/get_country_list}
 }
 

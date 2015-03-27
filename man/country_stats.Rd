@@ -48,7 +48,7 @@ country_stats(country="Sweden")
 Joona Lehtomaki <joona.lehtomaki@gmail.com>
 }
 \seealso{
-\url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_stats}
+\url{http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_country_stats_all}
 
 \code{\link{resolve_country}}
 }

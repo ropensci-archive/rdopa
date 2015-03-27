@@ -48,7 +48,7 @@ country_species_count(country=156, rlstatus=c("CR", "EN"))
 Joona Lehtomaki <joona.lehtomaki@gmail.com>
 }
 \seealso{
-\url{http://dopa-services.jrc.ec.europa.eu/rest/eAdmin/get_country_species_count}
+\url{http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_count}
 
 \code{\link{resolve_country}} \code{\link{check_iucn_status}}
 }
