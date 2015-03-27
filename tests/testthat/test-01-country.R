@@ -181,7 +181,7 @@ test_that("API values sane", {
             "Returned object is not a data frame")
 
   # Stats should include 10 categories
-  expect_equal(dim(uganda.stats), c(58, 18),
+  expect_equal(dim(uganda.stats), c(58, 19),
                info="Dimensions for returned data frame are incorrect")
   # Check a single PA
   pian_upe <- uganda.stats[3,]
