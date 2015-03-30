@@ -1,4 +1,6 @@
 language: r
+apt_packages:
+  - libgeos-c1
 r_binary_packages:
   - jsonlite
   - rgeos
