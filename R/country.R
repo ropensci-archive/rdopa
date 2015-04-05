@@ -177,7 +177,7 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' 
 #' 
 #' @param country Character country name or numeric country code.
-#' @param rlstatus A character vector of the IUCN Conservation Status for the 
+#' @param status A character vector of the IUCN Conservation Status for the 
 #'   species. Default is \code{NULL} in which case species of all statuses are 
 #'   requested.  For more information see 
 #'   \href{http://www.iucnredlist.org/technical-documents/categories-and-criteria}{here}.
@@ -193,13 +193,6 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'  website. To find the IUCN Species Identifier, search for a species and then 
 #'  look for the number in the URL, e.g. Orang Utan is 17975 \cr
 #'  \code{taxon} \tab The taxonomic name for the species \cr
-#'  \code{min_presence_id} \tab The min_presence_id indicates the minimum 
-#'  species presence according to the following values: 0-Unknown, 1-Extant, 
-#'  2-Probably Extant, 3-Possibly Extant, 4-Possibly Extinct, 5-Extinct 
-#'  (post 1500), 6-Presence Uncertain. The protected area may intersect the 
-#'  species with more than one presence type, so this is an indication of the 
-#'  minimum presence. For more information see the IUCN Red List Metadata 
-#'  Document \href{http://goo.gl/OfET66}{here}. \cr
 #'  \code{kingdom} \tab The kingdom for the species \cr
 #'  \code{phylum} \tab The phylum for the species \cr
 #'  \code{class} \tab The class for the species \cr
@@ -210,8 +203,6 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'  VU-Vulnerable, NT-Near Threatened, LC-Least Concern, EX-Extinct, EW-Extinct 
 #'  in the Wild, DD-Data Deficient. For more information see 
 #'  \href{http://goo.gl/wfnuHl}{here} \cr
-#'  \code{assessed} \tab The date the conservation status of the species was 
-#'  last assessed \cr
 #'  \code{commonname} \tab No description \cr
 #'  \code{language} \tab No description \cr
 #'  \code{country_id} \tab Country ISO code \cr
@@ -220,10 +211,11 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #' 
 #' @import httr
 #' @import R.cache
+#' @importFrom dplyr rename
 #' 
 #' @export
 #' 
-#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_list}
+#' @seealso \url{http://dopa-services.jrc.ec.europa.eu/services/ibex/especies/get_country_species_list}
 #' @seealso \code{\link{resolve_country}} \code{\link{check_iucn_status}} 
 #' 
 #' @author Joona Lehtomaki <joona.lehtomaki@@gmail.com>
@@ -237,11 +229,11 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
 #'                                                 rlstatus=c("CR", "EN", "VU"))
 #'  
 #' }
-country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
+country_species_list <- function(country, status=NULL, cache=TRUE) {
   
   code <- resolve_country(country)
   
-  key <- list("country_species_list", code, rlstatus)
+  key <- list("country_species_list", code, status)
   r_content <- NULL
   
   if (cache == TRUE) {
@@ -252,19 +244,19 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
   } else {
   
     # Construct the REST parameters
-    if (is.null(rlstatus)) {
+    if (is.null(status)) {
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/dopa/especies/get_country_species_list",
+               path = "services/ibex/especies/get_country_species_list",
                query = list(
                  country_id = code
                ))
     } else {
-      rlstatus <- check_iucn_status(rlstatus)
+      rlstatus <- check_iucn_status(status)
       r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/dopa/especies/get_country_species_list",
+               path = "services/ibex/especies/get_country_species_list",
                query = list(
                  country_id = code,
-                 rlstatus = paste(rlstatus, collapse=",")
+                 status = paste(status, collapse=",")
                ))
     }
     # Check the request succeeded
@@ -281,6 +273,9 @@ country_species_list <- function(country, rlstatus=NULL, cache=TRUE) {
   # Add country information
   dat$country_id <- resolve_country(country)
   dat$country_name <- resolve_country(country, full.name=TRUE)
+  
+  # Fix status col name
+  dat <- dplyr::rename(dat, status=X_status)
   
   return(dat)
 }

@@ -97,15 +97,13 @@ test_that("API values sane", {
   
   # Use New Zealand (country code = 554).
   # First get all species and check the number
-  expect_equal(nrow(kiwi.species), 463)
+  expect_equal(nrow(kiwi.species), 608)
   # Test some values/species. Let's take California quail
-  spp <- kiwi.species[69,]
-  expect_equivalent(spp$iucn_species_id, 141389,
+  spp <- kiwi.species[104,]
+  expect_equivalent(spp$iucn_species_id, 22679603,
                    "California quail IUCN species ID is wrong")
   expect_equivalent(spp$taxon, "Callipepla californica",
                     "California quail taxon is wrong")
-  expect_equivalent(spp$min_presence_id, 1,
-                    "California quail min_presence_id is wrong")
   expect_equivalent(spp$kingdom, "Animalia",
                     "California quail kingdom is wrong")
   expect_equivalent(spp$phylum, "Chordata",
@@ -118,8 +116,6 @@ test_that("API values sane", {
                     "California quail order is wrong")
   expect_equivalent(spp$status, "LC",
                     "California quail IUCN status is wrong")
-  expect_equivalent(spp$assessed, "2009/01/01",
-                    "California quail assessment date is wrong")
   expect_equivalent(spp$commonname, "California Quail",
                     "California quail common name is wrong")
   expect_equivalent(spp$language, "english",
@@ -130,13 +126,13 @@ test_that("API values sane", {
                      "Country name code not correct")
   
   # Test the rlstatus argument
-  kiwi.species.cr <- country_species_list(country="New Zealand", rlstatus="CR",
+  kiwi.species.cr <- country_species_list(country="New Zealand", status="CR",
                                           cache=FALSE)
-  expect_equal(nrow(kiwi.species.cr), 11)
+  expect_equal(nrow(kiwi.species.cr), 12)
   kiwi.species.cr.en <- country_species_list(country="New Zealand", 
-                                             rlstatus=c("CR", "EN"),
+                                             status=c("CR", "EN"),
                                              cache=FALSE)
-  expect_equal(nrow(kiwi.species.cr.en), 39)
+  expect_equal(nrow(kiwi.species.cr.en), 48)
   
 })
 

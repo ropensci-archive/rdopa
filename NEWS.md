@@ -1,3 +1,15 @@
+## rdopa 0.1.5
+
++ Map plotting example using WKT removed from the vignette since DOPA doesn't
+provide that data anymore.
++ Switch using the ibex database in the following functions: 
+`country_species_list()`.
++ Change `country_species_list()` parameter `rlstatus` to `status`.
+
+#### New features
+
+#### Bug fixes
+
 ## rdopa 0.1.4
 
 #### Bug fixes
