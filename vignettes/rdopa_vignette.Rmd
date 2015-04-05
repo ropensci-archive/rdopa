@@ -39,9 +39,9 @@ you're interested in all (globally) threatened species (i.e. those in IUCN
 categories CR, EN, or VU) that occur in Finland, do the following:
 
 ```{r species-list-1, message=FALSE}
-threatened.fin <- country_species_list('Finland', rlstatus=c("CR", "EN", "VU"))
+threatened.fin <- country_species_list('Finland', status=c("CR", "EN", "VU"))
 # Select only part of the columns (using dplyr)
-select(threatened.fin, iucn_species_id, taxon, class, status, assessed, commonname)
+select(threatened.fin, iucn_species_id, taxon, class, status, commonname)
 ```
 
 Function `country_species_count()` returns the total number of species within
@@ -56,7 +56,7 @@ This - and breakdown into individual categories - can of course be achieved by
 working with the complete country-specific species list:
 
 ```{r species-list-2, message=FALSE}
-threatened.bra <- country_species_list('Brazil', rlstatus=c("CR", "EN", "VU"))
+threatened.bra <- country_species_list('Brazil', status=c("CR", "EN", "VU"))
 # Total number
 nrow(threatened.bra)
 # Per category (using dplyr)
