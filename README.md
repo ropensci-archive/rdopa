@@ -11,7 +11,7 @@ rdopa is a R package for accessing data from the DOPA ([Digital Observatory for 
 | DOPA Service        | DOPA database | DOPA schema                           | Function                           |
 |------------------------------------|-----|-------------------------------|------------------------------------|
 | [get_country_species_count](http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_count) | dopa | especies | `country_species_count()` |
-| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_list)| dopa | especies | `country_species_list()` |
+| [get_country_species_list](http://dopa-services.jrc.ec.europa.eu/services/dopa/especies/get_country_species_list)| ibex | especies | `country_species_list()` |
 | [get_country_list](http://dopa-services.jrc.ec.europa.eu/services/dopa/ehabitat/get_country_list)| dopa | ehabitat | `country_list()` |
 | [get_country_stats](http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_country_stats_all)| ibex | ehabitat | `country_stats()` |
 | [get_pa_country_stats](http://dopa-services.jrc.ec.europa.eu/services/ibex/ehabitat/get_pa_country_stats) | ibex | especies | `pa_country_stats()` | 
