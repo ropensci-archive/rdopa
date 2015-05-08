@@ -49,7 +49,7 @@ country_list <- function(cache=TRUE) {
     # Construct the REST parameters, note that we must use an optional 
     # did=1 parameter
     r <- GET("http://dopa-services.jrc.ec.europa.eu",
-             path = "services/dopa/ehabitat/get_country_list",
+             path = "services/ibex/ehabitat/get_country_list",
              query = list(
                did = 1
              ))
