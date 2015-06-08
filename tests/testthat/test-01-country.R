@@ -16,7 +16,7 @@ test_that("API values sane", {
   # Check dimensions
   expect_equivalent(ncol(country_list(cache=FALSE)), 9,
                     "Invalid number of columns returned")
-  expect_equivalent(nrow(country_list(cache=FALSE)), 241,
+  expect_equivalent(nrow(country_list(cache=FALSE)), 242,
                     "Invalid number of countries returned")
   
 })
