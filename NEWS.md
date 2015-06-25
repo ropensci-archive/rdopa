@@ -6,10 +6,6 @@ provide that data anymore.
 `country_species_list()`.
 + Change `country_species_list()` parameter `rlstatus` to `status`.
 
-#### New features
-
-#### Bug fixes
-
 ## rdopa 0.1.4
 
 #### Bug fixes

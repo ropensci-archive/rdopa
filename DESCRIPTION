@@ -1,7 +1,7 @@
 Package: rdopa
 Type: Package
 Title: R client to Joint Research Centre's DOPA REST API
-Version: 0.1.4
+Version: 0.1.5
 Date: 2015-04-04
 Author: Joona Lehtomaki <joona.lehtomaki@gmail.com>
 Maintainer: Joona Lehtomaki <joona.lehtomaki@gmail.com>
