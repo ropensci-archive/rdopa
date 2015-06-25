@@ -123,46 +123,11 @@ country_species_count <- function(country, rlstatus=NULL, cache=TRUE) {
   code <- resolve_country(country)
   
   key <- list("country_species_count", code, rlstatus)
-  r_content <- NULL
   
-  if (cache == TRUE) {
-    r_content <- R.cache::loadCache(key, suffix=.options$cache)
-  }
-  if (!is.null(r_content)) {
-    message("Loaded cached data")
-  } else {
+  # Using get_country_list()
+  spp_list <- country_species_list(code, rlstatus, cache)
   
-    # Construct the REST parameters
-    if (is.null(rlstatus)) {
-      r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/dopa/especies/get_country_species_count",
-               query = list(
-                country_id = code
-               ))
-    } else {
-      rlstatus <- check_iucn_status(rlstatus)
-      r <- GET("http://dopa-services.jrc.ec.europa.eu",
-               path = "services/dopa/especies/get_country_species_count",
-               query = list(
-                 country_id = code,
-                 rlstatus = paste(rlstatus, collapse=",")
-               ))
-    }
-    # Check the request succeeded
-    stop_for_status(r)
-    
-    r_content <- content(r)
-    
-    if (cache == TRUE || cache == 'flush') {
-      R.cache::saveCache(r_content, key=key, suffix=.options$cache)
-    }
-  }
-  
-  # Only one record should be returned
-  if (length(r_content$records) > 1) {
-    warning("More than one response records received, something might be wrong")
-  }
-  spp_count <- r_content$records[[1]]$get_country_species_count
+  spp_count <- nrow(spp_list)
   
   return(spp_count)
 }

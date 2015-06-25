@@ -12,6 +12,12 @@ output:
 options(width=160)
 ```
 
+First, let's load some libraries.
+
+```{r load-libraries, message=FALSE}
+library(rdopa)
+library(dplyr)
+```
 
 ### Basic information and statistics
 
@@ -20,11 +26,10 @@ occurrence within the borders (or in some cases the Exclusive Economic Zone
 boundary)  of a given country. `country_list()` can be used to list all the 
 countries available in the DOPA database:
 
-```{r country-list, message=FALSE}
-library(rdopa)
-library(dplyr)
-
-cl <- country_list()
+```{r country-list, message=FALSE, eval=FALSE}
+# NOTE: currently (in version 0.1.6) DOPA server is giving a 500 internal server
+# error so this doesn't work
+cl <- country_list(cache = FALSE)
 head(cl)
 ```
 
@@ -38,7 +43,8 @@ you're interested in all (globally) threatened species (i.e. those in IUCN
 categories CR, EN, or VU) that occur in Finland, do the following:
 
 ```{r species-list-1, message=FALSE}
-threatened.fin <- country_species_list('Finland', status=c("CR", "EN", "VU"))
+threatened.fin <- country_species_list('Finland', status=c("CR", "EN", "VU"),
+                                       cache = FALSE)
 # Select only part of the columns (using dplyr)
 select(threatened.fin, iucn_species_id, taxon, class, status, commonname)
 ```
@@ -48,14 +54,16 @@ a given country that belong to a specific status categories. For example, to
 get the number of threatened species in Brazil:
 
 ```{r species-count-1, message=FALSE}
-country_species_count('Brazil', rlstatus=c("CR", "EN", "VU"))
+country_species_count('Brazil', rlstatus=c("CR", "EN", "VU"),
+                      cache = FALSE)
 ```
 
 This - and breakdown into individual categories - can of course be achieved by
 working with the complete country-specific species list:
 
 ```{r species-list-2, message=FALSE}
-threatened.bra <- country_species_list('Brazil', status=c("CR", "EN", "VU"))
+threatened.bra <- country_species_list('Brazil', status=c("CR", "EN", "VU"),
+                                       cache = FALSE)
 # Total number
 nrow(threatened.bra)
 # Per category (using dplyr)
@@ -70,15 +78,15 @@ Protected area (PA) statistics are available per country according to
 [IUCN PA categories](http://www.iucn.org/about/work/programmes/gpap_home/gpap_quality/gpap_pacategories/):
 
 ```{r country-stats, message=FALSE}
-country_stats("Sweden")
+country_stats("Sweden", cache = FALSE)
 ```
 
 Within a given country, statistics for individual PAs can be retrieved using
 `pa_country_stats()`. Let's find out all the PAs within Uganda:
 
 ```{r country-pa_stats, message=FALSE}
-uganda_pa_stats <- pa_country_stats("Uganda")
+uganda_pa_stats <- pa_country_stats("Uganda", cache = FALSE)
 nrow(uganda_pa_stats)
 ```
 
-So Uganda has 28 individual PAs in the WDPA. 
+So Uganda has 58 individual PAs in the WDPA. 
