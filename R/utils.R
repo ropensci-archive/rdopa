@@ -217,7 +217,7 @@ wktdf2sp <- function(x, wkt.col, p4s="+init=epsg:4326") {
     x_data$FID <- i
     # Use current row index as the polygon ID
     x_poly <- readWKT(x[i,][[wkt.col]], p4s=p4s, id=i)
-    #browser()
+    
     spatial_polygons[[i]] <- SpatialPolygonsDataFrame(x_poly, data=x_data,
                                                       match.ID="FID")
   }
