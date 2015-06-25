@@ -1,3 +1,12 @@
+## rdopa 0.1.6
+
++ Disable cahce for all functions in the vignette.
+
+#### Bug fixes
+
++ DOPA has removed get_country_species_count endpoint, so 
+`country_species_count()` now uses `country_species_list()`.
+
 ## rdopa 0.1.5
 
 + Map plotting example using WKT removed from the vignette since DOPA doesn't
