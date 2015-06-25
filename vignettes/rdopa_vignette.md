@@ -1,3 +1,16 @@
+---
+output:
+  html_document:
+    theme: flatly
+---
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Tutorial for the JRC's eSpecies API}
+-->
+
+
+
+
 ### Basic information and statistics
 
 DOPA provides an array of information on species and protected area (PA) 
@@ -8,7 +21,6 @@ countries available in the DOPA database:
 
 ```r
 library(rdopa)
-# We'll also be using package dplyr for data manipulation
 library(dplyr)
 
 cl <- country_list()
@@ -36,21 +48,30 @@ categories CR, EN, or VU) that occur in Finland, do the following:
 
 
 ```r
-threatened.fin <- country_species_list('Finland', rlstatus=c("CR", "EN", "VU"))
+threatened.fin <- country_species_list('Finland', status=c("CR", "EN", "VU"))
 # Select only part of the columns (using dplyr)
-select(threatened.fin, iucn_species_id, taxon, class, status, assessed, commonname)
+select(threatened.fin, iucn_species_id, taxon, class, status, commonname)
 ```
 
 ```
-##   iucn_species_id               taxon          class status   assessed                 commonname
-## 1          141446    Anser erythropus           Aves     VU 2008/01/01 Lesser White fronted Goose
-## 2          144493       Aquila clanga           Aves     VU 2008/01/01      Greater Spotted Eagle
-## 3            2191     Astacus astacus      Crustacea     VU 2010-06-08      Broad clawed Crayfish
-## 4          149662    Emberiza aureola           Aves     VU 2008/01/01    Yellow breasted Bunting
-## 5           11200         Lamna nasus Chondrichthyes     VU 2006-01-31            Beaumaris shark
-## 6          141555 Polysticta stelleri           Aves     VU 2010-08-28            Steller s Eider
-## 7           39326   Squalus acanthias Chondrichthyes     VU 2006-01-31                   Blue dog
-## 8           39332   Squatina squatina Chondrichthyes     CR 2006-01-31                      Angel
+##    iucn_species_id                taxon          class status                 commonname
+## 1           161817  Alisma wahlenbergii     Liliopsida     VU                       <NA>
+## 2            60344    Anguilla anguilla Actinopterygii     CR                       <NA>
+## 3         22679886     Anser erythropus           Aves     VU Lesser White fronted Goose
+## 4             2191      Astacus astacus   Malacostraca     VU      Broad clawed Crayfish
+## 5         13152906       Bombus alpinus        Insecta     VU                       <NA>
+## 6         22696027        Clanga clanga           Aves     VU                       <NA>
+## 7         22680427    Clangula hyemalis           Aves     VU           Long tailed Duck
+## 8           135672    Coregonus maraena Actinopterygii     VU         European whitefish
+## 9             5383    Coregonus trybomi Actinopterygii     CR      Spring spawning cisco
+## 10        22720966     Emberiza aureola           Aves     EN    Yellow breasted Bunting
+## 11           11200          Lamna nasus Chondrichthyes     VU            Beaumaris shark
+## 12        22724836      Melanitta fusca           Aves     EN              Velvet Scoter
+## 13          161870 Papaver laestadianum  Magnoliopsida     VU                       <NA>
+## 14        22680415  Polysticta stelleri           Aves     VU            Steller s Eider
+## 15           39326    Squalus acanthias Chondrichthyes     VU                   Blue dog
+## 16           39332    Squatina squatina Chondrichthyes     CR                      Angel
+## 17           21860      Thunnus thynnus Actinopterygii     EN      Atlantic Bluefin Tuna
 ```
 
 Function `country_species_count()` returns the total number of species within
@@ -71,13 +92,13 @@ working with the complete country-specific species list:
 
 
 ```r
-threatened.bra <- country_species_list('Brazil', rlstatus=c("CR", "EN", "VU"))
+threatened.bra <- country_species_list('Brazil', status=c("CR", "EN", "VU"))
 # Total number
 nrow(threatened.bra)
 ```
 
 ```
-## [1] 285
+## [1] 380
 ```
 
 ```r
@@ -91,9 +112,9 @@ threatened.bra %>%
 ## Source: local data frame [3 x 2]
 ## 
 ##   status count
-## 1     CR    43
-## 2     EN    86
-## 3     VU   156
+## 1     CR    60
+## 2     EN   105
+## 3     VU   215
 ```
 
 ### Protected areas
@@ -108,16 +129,17 @@ country_stats("Sweden")
 
 ```
 ##    category area_protected area_protected_perc area_total countryiso   name       iucn_cat
-## 1         0          61291               13.69     449211        752 Sweden              0
-## 2         1          31764                7.10     449211        752 Sweden             Ib
-## 3         2           2482                0.55     449211        752 Sweden             Ia
-## 4         3           6874                1.54     449211        752 Sweden             II
-## 5         4            267                0.06     449211        752 Sweden            III
-## 6         5            809                0.18     449211        752 Sweden             IV
-## 7         6           3535                0.79     449211        752 Sweden              V
-## 8         7             NA                  NA     449211        752 Sweden             VI
-## 9         8           3514                0.79     449211        752 Sweden   Not Reported
-## 10        9          12046                2.69     449211        752 Sweden Not Applicable
+## 1         0          78753               13.02      78753        752 Sweden              0
+## 2         1           5644                7.17       5644        752 Sweden             Ia
+## 3         2          30974               39.33      30974        752 Sweden             Ib
+## 4         3           7386                9.38       7386        752 Sweden             II
+## 5         4             NA                  NA      78753        752 Sweden            III
+## 6         5           1425                1.81       1425        752 Sweden             IV
+## 7         6           6791                8.62       6791        752 Sweden              V
+## 8         7             NA                  NA      78753        752 Sweden             VI
+## 9         8          24379               30.96      24379        752 Sweden   Not Reported
+## 10        9           1816                2.31       1816        752 Sweden   Not Assigned
+## 11        9             NA                  NA      78753        752 Sweden Not Applicable
 ```
 
 Within a given country, statistics for individual PAs can be retrieved using
@@ -130,62 +152,7 @@ nrow(uganda_pa_stats)
 ```
 
 ```
-## [1] 28
+## [1] 58
 ```
 
-So Uganda has 28 individual PAs in the WDPA. The data returned from DOPA 
-includes several metrics and a [WKT](https://en.wikipedia.org/wiki/Well-known_text) 
-representation of the PA boundaries. In other words, we can also plot the
-PAs on a map, but first we must do some conversion using the utility function
-`wktdf2sp()`:
-
-
-```r
-# Load spatial libraries
-library(ggmap)
-library(maptools)
-
-# First, convert the data into a SpatialPolygonsDataFrame
-sp_pa_uganda <- wktdf2sp(uganda_pa_stats, wkt.col="wdpa_wkt")
-
-# Let's get a background map using ggmap
-map_uganda <- get_map(location=bbox(sp_pa_uganda), zoom=7)
-```
-
-```
-## Warning: bounding box given to google - spatial extent only approximate.
-```
-
-```r
-ggmap(map_uganda) + geom_polygon(data = sp_pa_uganda,
-                            aes(x = long, 
-                                y = lat, group=group), fill="darkgreen",
-                            color ="white", alpha = .8, size = .2)
-```
-
-![plot of chunk country-pa_stats_map-1](figure/country-pa_stats_map-1-1.png) 
-
-Now we also create chloropleth maps using the the DOPA data. Let's visualize 
-the Habitat Replaceability Index (HRI) which is the ratio between
-similar areas outside park and the park itself, that can be used for
-characterizing the uniqueness of each protected area. Using `ggmap` and 
-`ggplot2` will take some mangling first:
-
-
-```r
-# Fortify the spatial data
-data_pa_uganda <- fortify(sp_pa_uganda)
-# Combine the fortified data with the actual attribute data. NOTE! This is 
-# a bit of a hack as the relation between polygon id and FID is implicit.
-data_pa_uganda <- merge(data_pa_uganda, as.data.frame(sp_pa_uganda),
-                        by.x="id", by.y="FID")
-
-# Apply some graphical styling too
-library(RColorBrewer)
-ggmap(map_uganda, darken=0.2) + geom_polygon(data = data_pa_uganda,
-                            aes(x = long, y = lat, group=group, fill=hri),
-                            color ="black", alpha = .9, size = .2) +
-  scale_fill_gradientn(colours = rev(brewer.pal(9, "Spectral")))
-```
-
-![plot of chunk country-pa_stats_map-2](figure/country-pa_stats_map-2-1.png) 
+So Uganda has 28 individual PAs in the WDPA. 

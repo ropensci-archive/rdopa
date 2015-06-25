@@ -22,6 +22,7 @@ countries available in the DOPA database:
 
 ```{r country-list, message=FALSE}
 library(rdopa)
+# We'll also be using package dplyr for data manipulation
 library(dplyr)
 
 cl <- country_list()
