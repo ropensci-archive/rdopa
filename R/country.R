@@ -54,6 +54,7 @@ country_list <- function(cache=TRUE) {
                did = 1
              ))
     
+    
     # Check the request succeeded
     stop_for_status(r)
     
