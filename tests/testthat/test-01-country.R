@@ -146,15 +146,15 @@ test_that("Arguments are handled correctly", {
                info="Using NULL for country code should raise an error")
 })
 
-test_that("API values sane", {
-  
-  # Get test data from Japan
-  japan.stats <- country_stats(country="Japan", cache=FALSE)
+#test_that("API values sane", {
+#  
+#  # Get test data from Japan
+#  japan.stats <- country_stats(country="Japan", cache=FALSE)
   
   # Stats should include 10 categories
-  expect_equal(nrow(japan.stats), 10)
+#  expect_equal(nrow(japan.stats), 10)
   
-})
+#})
 
 context("pa_country_stats")
 
