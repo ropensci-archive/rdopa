@@ -77,10 +77,6 @@ threatened.bra %>%
 Protected area (PA) statistics are available per country according to 
 [IUCN PA categories](http://www.iucn.org/about/work/programmes/gpap_home/gpap_quality/gpap_pacategories/):
 
-```{r country-stats, message=FALSE}
-country_stats("Sweden", cache = FALSE)
-```
-
 Within a given country, statistics for individual PAs can be retrieved using
 `pa_country_stats()`. Let's find out all the PAs within Uganda:
 
