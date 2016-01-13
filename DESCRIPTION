@@ -15,12 +15,12 @@ Depends:
 Imports:
     dplyr,
     httr,
-    jsonlite,
     rgeos,
     sp
 Suggests:
-    knitr,
+    rmarkdown,
     roxygen2,
     testthat
-VignetteBuilder: knitr
+VignetteBuilder: rmarkdown
 Roxygen: list(wrap = FALSE)
+RoxygenNote: 5.0.1
