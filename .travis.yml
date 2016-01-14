@@ -2,7 +2,7 @@ language: r
 apt_packages:
   - libgeos-dev
   - libgeos-c1
-  - qpdf
+  - texlive-binaries
 r_binary_packages:
   - jsonlite
 notifications:
