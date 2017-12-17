@@ -101,29 +101,29 @@ test_that("API values sane", {
   # Test some values/species. Let's take California quail
   spp <- kiwi.species[104,]
   expect_equivalent(spp$iucn_species_id, 22679603,
-                   "California quail IUCN species ID is wrong")
+                   info = "California quail IUCN species ID is wrong")
   expect_equivalent(spp$taxon, "Callipepla californica",
-                    "California quail taxon is wrong")
+                    info = "California quail taxon is wrong")
   expect_equivalent(spp$kingdom, "Animalia",
-                    "California quail kingdom is wrong")
+                    info = "California quail kingdom is wrong")
   expect_equivalent(spp$phylum, "Chordata",
-                    "California quail phylum is wrong")
+                    info = "California quail phylum is wrong")
   expect_equivalent(spp$class, "Aves",
-                    "California quail class is wrong")
+                    info = "California quail class is wrong")
   expect_equivalent(spp$order, "Galliformes",
-                    "California quail order is wrong")
+                    info = "California quail order is wrong")
   expect_equivalent(spp$family, "Odontophoridae",
-                    "California quail order is wrong")
+                    info = "California quail order is wrong")
   expect_equivalent(spp$status, "LC",
-                    "California quail IUCN status is wrong")
+                    info = "California quail IUCN status is wrong")
   expect_equivalent(spp$commonname, "California Quail",
-                    "California quail common name is wrong")
+                    info = "California quail common name is wrong")
   expect_equivalent(spp$language, "english",
-                    "California quail assessment language is wrong")
+                    info = "California quail assessment language is wrong")
   expect_equivalent(spp$country_id, 554,
-                    "Country ISO code not correct")
+                    info = "Country ISO code not correct")
   expect_equivalent(spp$country_name, "New Zealand",
-                     "Country name code not correct")
+                    info = "Country name code not correct")
   
   # Test the rlstatus argument
   kiwi.species.cr <- country_species_list(country="New Zealand", status="CR",
@@ -182,21 +182,21 @@ test_that("API values sane", {
   # Check a single PA
   pian_upe <- uganda.stats[3,]
   expect_equivalent(pian_upe$wdpaid, 1435,
-                    "WDPAID for Pian Upe (Uganda) is wrong")
+                    info = "WDPAID for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$iucn_cat, "III",
-                    "IUCN category for Pian Upe (Uganda) is wrong")
+                    info = "IUCN category for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$extent, "34.2144200000001,1.52357000000006,34.7992400000001,2.25289000000009",
-                    "Extent for Pian Upe (Uganda) is wrong")
+                    info = "Extent for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$name, "Pian Upe",
-                    "Name for Pian Upe (Uganda) is wrong")
+                    info = "Name for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$area, 2154,
-                    "Area for Pian Upe (Uganda) is wrong")
+                    info = "Area for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$pi, 14.45,
-                    "PI for Pian Upe (Uganda) is wrong")
+                    info = "PI for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$ap, 43.27,
-                    "AP for Pian Upe (Uganda) is wrong")
+                    info = "AP for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$gis_area, 2154,
-                    "GIS area for Pian Upe (Uganda) is wrong")
+                    info = "GIS area for Pian Upe (Uganda) is wrong")
   expect_equivalent(pian_upe$numterrsegms, 3.39,
-                    "NUMTERRSEGMS for Pian Upe (Uganda) is wrong")
+                    info = "NUMTERRSEGMS for Pian Upe (Uganda) is wrong")
 })
