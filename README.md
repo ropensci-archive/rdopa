@@ -1,4 +1,5 @@
 [![Build Status](https://api.travis-ci.org/ropensci/rdopa.svg?branch=master)](https://travis-ci.org/ropensci/rdopa)
+[![codecov.io](https://codecov.io/github/ropensci/rdopa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rdopa?branch=master)
 
 ## rdopa
 
