@@ -164,7 +164,7 @@ resolve_country <- function(country, full.name=FALSE) {
     }
   } else if (is.numeric(country)) {
     # Check that the ISO code exists
-    if (!country %in% countrycode_data$iso3n) {
+    if (!country %in% codelist$iso3n) {
       stop("Country code ", country, " not a valid ISO 3166-1 code")
     } else {
       if (full.name) {
