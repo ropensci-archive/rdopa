@@ -3,7 +3,7 @@ dist: trusty
 language: r
 apt_packages:
   - libgeos-dev
-  - libgeos
+  - geos
   - texlive-binaries
 r_binary_packages:
   - jsonlite
