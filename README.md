@@ -1,5 +1,5 @@
-[![Build Status](https://api.travis-ci.org/ropensci/rdopa.svg?branch=master)](https://travis-ci.org/ropensci/rdopa)
-[![codecov.io](https://codecov.io/github/ropensci/rdopa/coverage.svg?branch=master)](https://codecov.io/github/ropensci/rdopa?branch=master)
+[![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
+
 
 ## rdopa
 
